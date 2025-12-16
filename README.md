@@ -53,7 +53,6 @@ This application features a modern, responsive user interface designed with **Ta
 
 https://github.com/user-attachments/assets/3c9738ba-f120-43ad-bbd0-2ed8933f715a
 
-
 ## 🚀 Key Features
 
 - **CRUD Operations**: Create, Read, Update, and Delete products seamlessly.
@@ -153,3 +152,9 @@ This application manages user access to articles and videos based on three diffe
 
 ### Development Environment
 - Laragon
+
+# Custom Material UI calendar and password field with strict validations
+
+https://prog-ops.github.io/namepasswdncalendarinput/
+
+A fine custom Material UI calendar and password field with strict validations
