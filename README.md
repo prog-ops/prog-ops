@@ -153,6 +153,21 @@ This application manages user access to articles and videos based on three diffe
 ### Development Environment
 - Laragon
 
+# Movie CRUD App (Vue 3 + Quasar 2)
+
+https://github.com/prog-ops/movue
+
+This project is a **Movie CRUD (Create, Read, Update, Delete) single-page application** built with **Vue 3**, **Quasar Framework 2 (Vite)**, **TypeScript**, **Pinia** for state management, and **Axios** for HTTP requests. It is based on a standard Quasar CLI scaffold and customized to work with a movie list/detail flow.
+
+## Tech Stack
+
+- **Framework**: Vue 3 + Quasar 2 (SPA mode, Vite bundler)
+- **Language**: TypeScript
+- **State Management**: Pinia
+- **HTTP Client**: Axios
+- **Styling**: Sass/SCSS
+- **Tooling**: ESLint (with Prettier), Jest, pnpm
+
 # Custom Material UI calendar and password field with strict validations
 
 https://prog-ops.github.io/namepasswdncalendarinput/
