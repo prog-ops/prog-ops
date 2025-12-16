@@ -104,6 +104,20 @@ This project comes with the following features:
 - Responsive UI that adapts to different screen sizes, including mobile devices
 - Unit and integration tests to ensure quality and stability of the project
 
+# Drag & Drop Note
+
+https://github.com/prog-ops/dragdropnote
+
+- Vite
+- React
+- Zustand
+- pnpm
+- Permanent local storage
+
+![Screenshot_154](https://github.com/prog-ops/dragdropnote/assets/59245989/f563c419-6001-410c-95f2-bd104abf5f05)
+
+![Screenshot_155](https://github.com/prog-ops/dragdropnote/assets/59245989/6222c1de-11c0-45c5-9b41-c8efb4bf6989)
+
 # Get The Bubble - Multiplayer Game
 
 https://github.com/prog-ops/GetTheBubbleMultiplayer
