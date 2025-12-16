@@ -199,3 +199,22 @@ This project is a **Movie CRUD (Create, Read, Update, Delete) single-page applic
 https://prog-ops.github.io/namepasswdncalendarinput/
 
 A fine custom Material UI calendar and password field with strict validations
+
+# Note React Native App
+
+https://github.com/prog-ops/NoteApp
+
+## Features
+
+- CRUD
+- Save to local storage
+- Filtering notes
+- Animation
+- Testing
+
+## Libraries
+
+- AsyncStorage
+- React Native Paper UI
+- ReactNavigation
+- etc
