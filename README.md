@@ -117,3 +117,39 @@ Get The Bubble is a fast-paced multiplayer game built with modern web technologi
    - Passive Hits: Players who are hit by others will win the encounter
 5. Winning: Player with the highest bubble count at the end wins
 6. Detection: Smart movement algorithm detects aggressive vs. passive collisions
+
+# Content Membership Platform
+
+https://github.com/prog-ops/membership-api
+
+Welcome to the Content Membership Platform repository! This is a full-stack web application built as a case study to implement a membership system with various levels of access rights to digital content.
+This application manages user access to articles and videos based on three different membership tiers (Type A, B, and C), and supports both manual and social authentication (Google & Facebook).
+
+## ✨ Key Features
+- **Complete Authentication:**
+    - Manual registration and login with validation.
+    - Social media login using Google and Facebook via Laravel Socialite.
+- **3-Tier Membership System:**
+    - Type A: Limited access to 3 articles and 3 videos.
+    - Type B: Medium access to 10 articles and 10 videos.
+    - Type C: Full access to all content.
+- **Role-Based Access Control (RBAC):** Content displayed to users is dynamically filtered on the backend based on their membership level.
+- **User Dashboard:** A personalized dashboard page displaying a summary of the user's access rights.
+- **Modern Architecture:** Built with a monolithic SPA approach using Laravel and Inertia.js for a fast and reactive user experience without needing to build a separate API.
+
+## 💻 Tech Stack
+### Backend
+- PHP 8.x
+- Laravel 10.x
+- Laravel Socialite (for Social Login)
+- PostgreSQL database
+
+### Frontend
+- React.js
+- TypeScript
+- Inertia.js (backend & frontend bridge)
+- Tailwind CSS
+- Vite (build tool)
+
+### Development Environment
+- Laragon
