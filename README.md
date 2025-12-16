@@ -78,6 +78,32 @@ https://github.com/user-attachments/assets/3c9738ba-f120-43ad-bbd0-2ed8933f715a
 - **HTTP Client**: Axios
 - **Routing**: React Router DOM (v6)
 
+# Github Users App
+
+https://github.com/prog-ops/mygithub_user_repos
+
+A React JS project with improved UI effects, animations, logical conditions, styles, keyboard handling, error and loading handling, and responsive UI, that is optimized for mobile view.
+
+## Tech Stack
+This project is built using the following tech stack:
+- React
+- TypeScript
+- Material UI
+- Redux
+- Hooks
+- Debouncing
+
+## Features
+This project comes with the following features:
+- Loads 5 github users as we typing and shows their repositories
+- Improved UI effects and animations
+- Logical conditions that enhance user experience
+- Improved styles that make the UI look sleek and modern
+- Keyboard handling that enables users to use shortcuts for common actions
+- Error and loading handling that give users feedback on what's happening in the background
+- Responsive UI that adapts to different screen sizes, including mobile devices
+- Unit and integration tests to ensure quality and stability of the project
+
 # Get The Bubble - Multiplayer Game
 
 https://github.com/prog-ops/GetTheBubbleMultiplayer
