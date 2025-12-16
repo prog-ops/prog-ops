@@ -78,3 +78,42 @@ https://github.com/user-attachments/assets/3c9738ba-f120-43ad-bbd0-2ed8933f715a
 - **Styling**: Tailwind CSS (v4)
 - **HTTP Client**: Axios
 - **Routing**: React Router DOM (v6)
+
+# Get The Bubble - Multiplayer Game
+
+https://github.com/prog-ops/GetTheBubbleMultiplayer
+
+A real-time multiplayer game where players compete to collect bubbles while strategically avoiding or engaging with opponents.
+
+## Overview
+
+Get The Bubble is a fast-paced multiplayer game built with modern web technologies. Players navigate an arena, collecting yellow bubbles to score points while using clever movement strategies to outmaneuver opponents. The game features intelligent collision detection that distinguishes between aggressive and passive movements, adding a strategic layer to player interactions.
+
+## Features
+
+🎮 Real-time multiplayer gameplay
+🏆 Strategic collision system (active vs passive hits)
+⚡ Smooth gameplay with Socket.io synchronization
+🎨 Engaging visuals powered by Phaser
+📱 Responsive design with HTML5
+🔧 Optimized build process with Webpack
+
+## Technology Stack
+
+- Node.js - Backend server and game logic
+- Socket.io - Real-time bidirectional communication
+- Phaser - HTML5 game framework for rendering and physics
+- Webpack - Module bundler and build optimization
+- HTML5 - Frontend structure and styling
+
+## Game Rules
+
+1. Setup: Game starts when players connect; wait for other players to join
+2. Objective: Collect as many small yellow bubbles as possible
+3. Movement: Navigate your player character around the arena
+4. Collisions:
+   - Avoid colliding with other players
+   - Active Hits: Players who actively ram into others will lose
+   - Passive Hits: Players who are hit by others will win the encounter
+5. Winning: Player with the highest bubble count at the end wins
+6. Detection: Smart movement algorithm detects aggressive vs. passive collisions
