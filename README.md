@@ -78,6 +78,22 @@ https://github.com/user-attachments/assets/3c9738ba-f120-43ad-bbd0-2ed8933f715a
 - **HTTP Client**: Axios
 - **Routing**: React Router DOM (v6)
 
+# Seller Products Monorepo
+
+https://github.com/prog-ops/seller_products
+
+Sistem manajemen produk sederhana (Dashboard Penjual) yang terdiri dari Frontend React dan Backend Express.
+
+## 📂 Struktur Folder
+
+- **`be`** (Backend Utama): Node.js, Express, MySQL, Sequelize. Berjalan di port `5000`.
+- **`seller_products`** (Frontend Utama): React, Vite, Ant Design, Bulma. Berjalan di port `5173`.
+
+## 🚀 Prasyarat
+
+- **Node.js** terinstall.
+- **MySQL** terinstall dan berjalan (via XAMPP, atau Laragon atau service).
+
 # Github Users App
 
 https://github.com/prog-ops/mygithub_user_repos
