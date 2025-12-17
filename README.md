@@ -78,7 +78,7 @@ https://github.com/user-attachments/assets/3c9738ba-f120-43ad-bbd0-2ed8933f715a
 - **HTTP Client**: Axios
 - **Routing**: React Router DOM (v6)
 
-# Seller Products Monorepo
+# MERN Seller Products Monorepo
 
 https://github.com/prog-ops/seller_products
 
