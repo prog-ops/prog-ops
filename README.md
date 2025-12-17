@@ -209,6 +209,25 @@ This application manages user access to articles and videos based on three diffe
 ### Development Environment
 - Laragon
 
+# Next.js + Firebase Auth
+
+A modern web application built with **Next.js 14**, **TypeScript**, and **Firebase**, featuring secure user authentication and a responsive user interface powered by **Tailwind CSS**.
+
+## 🚀 Tech Stack
+
+- **Framework:** [Next.js 14](https://nextjs.org/) (App Router)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Authentication:** [Firebase Auth](https://firebase.google.com/docs/auth)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **State Management (Auth):** [React Firebase Hooks](https://github.com/CSFrequency/react-firebase-hooks)
+
+## ✨ Features
+
+- **Secure Authentication:** Complete Sign-in and Sign-up flows using Firebase Authentication.
+- **Protected Routes:** Client-side route protection ensuring only authenticated users can access the dashboard.
+- **Responsive Design:** Optimized for all device sizes using Tailwind CSS.
+- **Modern Architecture:** Built on Next.js 14 App Router for better performance and organization.
+
 # Movie CRUD App (Vue 3 + Quasar 2)
 
 https://github.com/prog-ops/movue
