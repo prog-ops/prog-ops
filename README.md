@@ -197,7 +197,12 @@ This application manages user access to articles and videos based on three diffe
 
 https://github.com/prog-ops/movue
 
-This project is a **Movie CRUD (Create, Read, Update, Delete) single-page application** built with **Vue 3**, **Quasar Framework 2 (Vite)**, **TypeScript**, **Pinia** for state management, and **Axios** for HTTP requests. It is based on a standard Quasar CLI scaffold and customized to work with a movie list/detail flow.
+This project is a **Movie CRUD (Create, Read, Update, Delete) application**
+built with **Vue 3**, **Quasar Framework 2 (Vite)**, **TypeScript**, **Pinia**
+for state management, and **Axios** for HTTP requests.
+
+The project uses the Quasar CLI and is structured to support multiple
+deployment modes (SPA, SSR, PWA, and others), with a movie list/detail flow.
 
 ## Tech Stack
 
