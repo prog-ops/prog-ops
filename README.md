@@ -183,16 +183,18 @@ This project comes with the following features:
 
 ---
 
-Full Stack MERN & Mediator Backend for ReactJS
+# Full Stack MERN & Mediator Backend for ReactJS
 
 https://github.com/prog-ops/business
 
 ## Apps
+
 1. NodeJS - MySQL Yelp-like backend
 2. NodeJS server as an intermediary between ReactJS frontend and Yelp API
 3. ReactJS frontend
 
 ## Features
+
 1. Backend
    - NodeJS
    - Express
