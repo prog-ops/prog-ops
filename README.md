@@ -19,6 +19,9 @@ https://native-dashboard-nu.vercel.app/
 - `src/pages`: Page components.
 - `src/styles`: CSS tokens and utilities.
 
+
+
+
 ---
 
 # 🛍️ Shopping Gallery UI (Modern E-Commerce)
@@ -59,6 +62,9 @@ This is engineered for performance and scalability.
 - **Icons**: React Icons
 - **Language**: JavaScript (ES6+)
 
+
+
+
 ---
 
 # Multiple Choice Question (MCQ) Quiz App
@@ -87,6 +93,11 @@ A modern, interactive quiz application built with React and TypeScript that uses
 - **Redux Persist** - State persistence
 - **React Router** - Navigation
 - **Open Trivia DB API** - Question source
+
+
+
+
+---
 
 # MERN Product Management App
 
@@ -119,6 +130,11 @@ https://github.com/user-attachments/assets/3c9738ba-f120-43ad-bbd0-2ed8933f715a
 - **Styling**: Tailwind CSS (v4)
 - **HTTP Client**: Axios
 - **Routing**: React Router DOM (v6)
+
+
+
+
+---
 
 # MERN Seller Products Monorepo
 
@@ -162,6 +178,45 @@ This project comes with the following features:
 - Responsive UI that adapts to different screen sizes, including mobile devices
 - Unit and integration tests to ensure quality and stability of the project
 
+
+
+
+---
+
+Full Stack MERN & Mediator Backend for ReactJS
+
+https://github.com/prog-ops/business
+
+## Apps
+1. NodeJS - MySQL Yelp-like backend
+2. NodeJS server as an intermediary between ReactJS frontend and Yelp API
+3. ReactJS frontend
+
+## Features
+1. Backend
+   - NodeJS
+   - Express
+   - Cors
+   - Axios
+   - dotenv
+   - etc
+2. MySQL database
+3. Frontend
+   - Vite + React
+   - SWC
+   - Tailwind
+   - Pagination
+   - Search by term
+   - Filter by categories and price
+   - Debouncing
+   - Clean code
+   - etc
+
+
+
+
+---
+
 # Drag & Drop Note
 
 https://github.com/prog-ops/dragdropnote
@@ -175,6 +230,11 @@ https://github.com/prog-ops/dragdropnote
 ![Screenshot_154](https://github.com/prog-ops/dragdropnote/assets/59245989/f563c419-6001-410c-95f2-bd104abf5f05)
 
 ![Screenshot_155](https://github.com/prog-ops/dragdropnote/assets/59245989/6222c1de-11c0-45c5-9b41-c8efb4bf6989)
+
+
+
+
+---
 
 # Get The Bubble - Multiplayer Game
 
@@ -215,6 +275,11 @@ Get The Bubble is a fast-paced multiplayer game built with modern web technologi
 5. Winning: Player with the highest bubble count at the end wins
 6. Detection: Smart movement algorithm detects aggressive vs. passive collisions
 
+
+
+
+---
+
 # Content Membership Platform
 
 https://github.com/prog-ops/membership-api
@@ -251,6 +316,11 @@ This application manages user access to articles and videos based on three diffe
 ### Development Environment
 - Laragon
 
+
+
+
+---
+
 # Next.js + Firebase Auth
 
 A modern web application built with **Next.js 14**, **TypeScript**, and **Firebase**, featuring secure user authentication and a responsive user interface powered by **Tailwind CSS**.
@@ -269,6 +339,11 @@ A modern web application built with **Next.js 14**, **TypeScript**, and **Fireba
 - **Protected Routes:** Client-side route protection ensuring only authenticated users can access the dashboard.
 - **Responsive Design:** Optimized for all device sizes using Tailwind CSS.
 - **Modern Architecture:** Built on Next.js 14 App Router for better performance and organization.
+
+
+
+
+---
 
 # Movie CRUD App (Vue 3 + Quasar 2)
 
@@ -295,6 +370,11 @@ deployment modes (SPA, SSR, PWA, and others), with a movie list/detail flow.
 https://prog-ops.github.io/namepasswdncalendarinput/
 
 A fine custom Material UI calendar and password field with strict validations
+
+
+
+
+---
 
 # Note React Native App
 
