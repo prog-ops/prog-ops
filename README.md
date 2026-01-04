@@ -232,7 +232,7 @@ This project comes with the following features:
 
 # Full Stack MERN & Mediator Backend for ReactJS
 
-https://github.com/user-attachments/assets/97f73a52-3b40-4bd6-8840-21aab6a05b2e
+https://github.com/user-attachments/assets/c2e2965a-f39a-4cb7-9042-3a8fcf05cd82
 
 ## Apps
 
