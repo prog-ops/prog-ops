@@ -648,29 +648,34 @@ The application logic follows a finite state machine (FSM) principle where each 
 
 ```mermaid
 stateDiagram-v2
-    [*] --> New: Create Task
-
-    state "Tab 1: New (Red)" as New {
+    [*] --> NewTab
+    
+    state NewTab {
         [*] --> Idle
         Idle --> Discard: Delete
-        Idle --> Ongoing: Checkbox Clicked
+        Idle --> OngoingTab: Checkbox Clicked
     }
-
-    state "Tab 2: Ongoing (Yellow)" as Ongoing {
+    
+    state OngoingTab {
         [*] --> Processing
         Processing --> Discard: Delete
-        Processing --> Done: Checkbox Clicked
+        Processing --> DoneTab: Checkbox Clicked
     }
-
-    state "Tab 3: Done (Green)" as Done {
+    
+    state DoneTab {
         [*] --> Locked
         Locked --> Discard: Delete
-        Locked --> New: Checkbox Clicked (Recycle)
+        Locked --> NewTab: Checkbox Clicked (Recycle)
+    }
+    
+    state Discard {
+        [*] --> Terminated
+        Terminated --> [*]
     }
 
-    note right of New: Entry Point
-    note right of Ongoing: WIP Limit (Implicit)
-    note right of Done: Cycle Complete
+    note left of NewTab: Entry Point
+    note right of OngoingTab: WIP Limit (Implicit)
+    note right of DoneTab: Cycle Complete
 ```
 
 ### 2. Component Architecture
