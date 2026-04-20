@@ -620,102 +620,278 @@ A modern web application built with **Next.js 14**, **TypeScript**, and **Fireba
 
 # 🚀 Ionic React TaskFlow
 
-https://ionic-typescript.pages.dev/
+> **A Momentum-Driven Hybrid Mobile Task Management App — Built with Senior-Level Engineering Patterns**
 
-> **A High-Performance Hybrid Mobile Application for Agile Task Management**
+---
 
-## 📋 Executive Summary (Business Analysis)
+## 📋 Executive Summary
 
 ### The Problem
 
-In fast-paced personal or micro-team environments, traditional project management tools (Jira, Trello, Asana) often introduce **cognitive overload/overhead**. Users frequently need a zero-friction way to check item status transitions without configuring complex boards or workflows.
+Traditional task management tools (Jira, Trello, Asana) often introduce **cognitive overload** for individual users and micro-teams. They optimize for features, not for action. Users waste time configuring boards and workflows instead of actually getting things done.
 
-### The Solution: "Linear Flow Architecture"
+Worse, stale tasks accumulate silently. There's no visual feedback for items sitting untouched for days — they look exactly the same as fresh ones.
 
-This application implements a **Unidirectional State Flow Pattern**. Unlike a Kanban board where cards move freely, this app enforces a strict progression lifecycle:
+### The Solution
 
-1.  **Creation Phase (Red)**: Brainstorming & Backlog.
-2.  **Execution Phase (Yellow)**: Active Development/Processing.
-3.  **Completion Phase (Green)**: Deployment/Archival.
+TaskFlow implements two core differentiators:
 
-This constraint reduces decision fatigue, allowing users to focus purely on "moving the ball forward."
+1. **Unidirectional State Flow** — Tasks progress through a strict lifecycle (`New → Ongoing → Done`) rather than floating freely on a Kanban board. This reduces decision fatigue and enforces forward momentum.
 
-## 🏗 System Architecture & Solution Design
+2. **Task Decay** — A novel UX feature where tasks visually degrade over time when left untouched. This creates progressive psychological urgency without aggressive notifications, making stale work impossible to ignore.
 
-### 1. State Transition Diagram (Mermaid)
+---
 
-The application logic follows a finite state machine (FSM) principle where each task has a strict next state.
+## ✨ Key Features
+
+### 🔥 Task Decay (Unique Feature)
+
+Tasks are not static. They **age** over time based on `lastTouchedAt` timestamp:
+
+| Decay Level | Idle Time | Visual Effect |
+|:------------|:----------|:--------------|
+| 🟢 **Fresh** | 0–24 hours | Normal appearance |
+| ⏳ **Stale** | 1–3 days | Opacity 85%, yellow left border, badge `"⏳ 2d idle"` |
+| ⚠️ **Decaying** | 3–5 days | Opacity 70%, desaturated, red border, badge `"⚠️ 4d idle"` |
+| 💀 **Decayed** | 5+ days | Opacity 55%, heavily desaturated, red border, badge `"💀 7d idle"` |
+
+Editing or moving a task **resets the decay timer**, rewarding interaction.
+
+### ↩️ Undo/Redo (Command Pattern)
+
+Every mutation (add, delete, edit, move) is encapsulated as a reversible **Command** object. This enables:
+
+- Full undo/redo history (up to 50 actions)
+- Accessible via toolbar buttons on every tab
+- Commands are **pure data** (not closures), making them serializable and debuggable
+
+### 💾 Local Persistence
+
+All data is automatically persisted to `localStorage` with seamless migration support for schema changes.
+
+### 📱 Linear Flow Architecture
+
+Tasks progress through three phases with a single interaction (checkbox tap):
+
+```
+New (Red) ──checkbox──▶ Ongoing (Yellow) ──checkbox──▶ Done (Green)
+```
+
+The Done tab intentionally has no forward action — completed tasks stay completed, and can only be edited or deleted.
+
+---
+
+## 🏗 Architecture & Engineering Decisions
+
+### State Transition Diagram
 
 ```mermaid
 stateDiagram-v2
-    [*] --> NewTab_Idle
-    
-    NewTab_Idle --> Discard: Delete
-    NewTab_Idle --> OngoingTab_Processing: Checkbox Clicked
-    
-    OngoingTab_Processing --> Discard: Delete
-    OngoingTab_Processing --> DoneTab_Locked: Checkbox Clicked
-    
-    DoneTab_Locked --> Discard: Delete
-    DoneTab_Locked --> NewTab_Idle: Checkbox Clicked (Recycle)
-    
-    state Discard {
-        [*] --> Terminated
-        Terminated --> [*]
-    }
+    [*] --> New
 
-    note left of NewTab_Idle: Entry Point
-    note right of OngoingTab_Processing: WIP Limit (Implicit)
-    note right of DoneTab_Locked: Cycle Complete
+    New --> Ongoing: Checkbox ✓
+    New --> Discarded: Delete ✕
+
+    Ongoing --> Done: Checkbox ✓
+    Ongoing --> Discarded: Delete ✕
+
+    Done --> Discarded: Delete ✕
+
+    state "Any State" as any
+    any --> any: Undo / Redo (Command Pattern)
+
+    note left of New: Entry point.\nAll tasks start here.\nDecay timer begins.
+    note right of Done: Terminal state.\nNo forward action.\nEdit & delete only.
 ```
 
-### 2. Component Architecture
+### Component Architecture (Atomic Design)
 
-We utilized **Atomic Design Principles** adapted for React/Ionic:
+```
+src/
+├── context/
+│   └── TaskContext.tsx          # Global state + Command Pattern interpreter
+├── hooks/
+│   ├── useCommandHistory.ts     # Generic undo/redo stack (reusable)
+│   └── useTaskDecay.ts          # Decay level calculation utilities
+├── components/
+│   ├── TaskItem.tsx             # Task card with decay visuals
+│   ├── TaskItem.css             # Decay CSS + card styles
+│   └── UndoRedoButtons.tsx      # Reusable toolbar undo/redo controls
+├── pages/
+│   ├── Tab1.tsx                 # New Tasks (Red)
+│   ├── Tab2.tsx                 # Ongoing Tasks (Yellow)
+│   └── Tab3.tsx                 # Done Tasks (Green)
+└── App.tsx                      # Router + Tab layout
+```
 
-- **Atoms**: `IonButton`, `IonCheckbox`, `IonLabel` (Standard Ionic UI Components).
-- **Molecules**: `TaskItem` (Encapsulates logic for display, delete, and state transition).
-- **Organisms**: `Tab1`, `Tab2`, `Tab3` (Page-level controllers fetching specific slices of state).
-- **Templates**: `App.tsx` (Routing and Main Layout).
+| Layer | Role | Examples |
+|:------|:-----|:--------|
+| **Atoms** | Standard Ionic UI primitives | `IonButton`, `IonCheckbox`, `IonBadge` |
+| **Molecules** | Encapsulated task UI with logic | `TaskItem`, `UndoRedoButtons` |
+| **Organisms** | Page-level controllers with filtered state | `Tab1`, `Tab2`, `Tab3` |
+| **Templates** | Routing and layout | `App.tsx` |
 
-### 3. Data Flow Strategy (Context API)
+### Data Flow: Context API + Command Pattern
 
-Instead of prop-drilling or adding heavy dependencies like Redux for a mid-sized application, we implemented the **React Context API + Hooks Pattern**:
+```mermaid
+flowchart LR
+    UI["UI Action<br/>(add/edit/delete/move)"]
+    CMD["Create Command<br/>(pure data object)"]
+    APPLY["applyCommand()<br/>execute | undo"]
+    STATE["setTasks()<br/>(functional updater)"]
+    HISTORY["useCommandHistory<br/>(undo/redo stack)"]
+    LS["localStorage<br/>(auto-persist)"]
+    DECAY["useTaskDecay<br/>(visual calculation)"]
 
-- **Single Source of Truth**: `TaskContext` holds the global array of tasks.
-- **Immutability**: State updates use array mapping/filtering to ensure React re-renders efficiently.
-- **Separation of Concerns**: UI components (`TaskItem`) are purely presentational and event-driven; Logic resides in the Context Provider.
+    UI --> CMD --> APPLY --> STATE
+    CMD --> HISTORY
+    STATE --> LS
+    STATE --> DECAY
+    HISTORY -->|"undo()"| APPLY
+    HISTORY -->|"redo()"| APPLY
+```
 
-## 🛠 Tech Stack & Engineering Decisions
+**Why Command Pattern over simple state updates?**
 
-| Category        | Technology          | Decision Rationale                                                                                                 |
-| :-------------- | :------------------ | :----------------------------------------------------------------------------------------------------------------- |
-| **Framework**   | **Ionic 8**         | Provides native-grade UI components (Shadow DOM) and smoother transitions than basic HTML/CSS.                     |
-| **View Engine** | **React 18**        | Leverages the latest Concurrent features and robust hook ecosystem.                                                |
-| **Build Tool**  | **Vite**            | Replaced `react-scripts` (Webpack) to achieve <300ms HMR (Hot Module Replacement) and optimized production builds. |
-| **Language**    | **TypeScript**      | Enforces type safety, preventing "undefined" runtime errors common in loosely typed JS apps.                       |
-| **Routing**     | **React Router v5** | Selected specific v5 stability to ensure maximum compatibility with `@ionic/react-router` legacy adapters.         |
-| **Styling**     | **CSS3 Variables**  | Utilized CSS Variables (`--border-radius`, `rem`) for responsive design and Dark Mode readiness.                   |
+- Every action is **reversible** — undo restores exact previous state, including timestamps
+- Commands are **data, not closures** — avoids stale closure bugs, makes debugging trivial
+- The pattern is a **recognized GoF design pattern** that demonstrates architectural thinking beyond CRUD
+
+**Why Context API over Redux/Zustand?**
+
+- Application scope is contained — a single domain (tasks) with 4 mutations
+- Context + `useCallback` + functional updaters provide identical guarantees with zero additional dependencies
+- Moving to a state library is straightforward if scope grows, since the Command Pattern abstraction is decoupled
+
+---
+
+## 🛠 Tech Stack
+
+| Category | Technology | Decision Rationale |
+|:---------|:-----------|:-------------------|
+| **Framework** | Ionic 8 | Native-grade UI components via Shadow DOM, smooth platform-specific transitions |
+| **View Engine** | React 18 | Concurrent features, robust hook ecosystem, industry standard |
+| **Build Tool** | Vite 5 | Sub-300ms HMR, optimized production builds, ES module native |
+| **Language** | TypeScript 5 | Compile-time type safety, discriminated unions for Command types |
+| **Routing** | React Router v5 + history v4 | Pinned for `@ionic/react-router` compatibility |
+| **Styling** | CSS3 Variables + Ionic Theming | CSS custom properties for responsive design and dark mode readiness |
+| **Persistence** | localStorage | Zero-config, instant, with migration layer for schema evolution |
+
+---
+
+## 🐛 Bugs Identified & Resolved
+
+During a comprehensive audit, **8 bugs** were identified and systematically resolved:
+
+| # | Bug | Severity | Resolution |
+|:--|:----|:---------|:-----------|
+| 1 | **ID collision** — `Date.now()` produced duplicate IDs on rapid adds | 🔴 High | Replaced with `crypto.randomUUID()` |
+| 2 | **Stale closures** — All state mutations referenced stale `tasks` variable | 🔴 High | Migrated to functional updaters `setTasks(prev => ...)` |
+| 3 | **Dependency mismatch** — `history@5` incompatible with `react-router@5` | 🟡 Medium | Downgraded to `history@^4.10.1` |
+| 4 | **Confusing cycle-back** — Done tab checkbox recycled tasks to New | 🟡 Medium | Removed checkbox from Done tab, made props optional |
+| 5 | **Checkbox visual flash** — `IonCheckbox checked={false}` in Shadow DOM | 🟡 Medium | Checkbox conditionally rendered only where move is possible |
+| 6 | **Unused import** — `useEffect` imported but never used | 🟢 Low | Now actively used for localStorage persistence |
+| 7 | **Debug logs in production** — `console.log` statements left in code | 🟢 Low | Removed |
+| 8 | **No data persistence** — All data lost on page refresh | 🟢 Low | Implemented localStorage with migration support |
+
+---
+
+## 💻 Installation & Development
+
+### Prerequisites
+
+- Node.js v18+
+- Bun (recommended) or npm
+
+### Steps
+
+1. **Clone the Repository**
+
+    ```bash
+    git clone https://github.com/your-repo/ionic-react-taskflow.git
+    cd ionic-react-taskflow
+    ```
+
+2. **Install Dependencies**
+
+    ```bash
+    bun install
+    # or
+    npm install
+    ```
+
+3. **Run Development Server**
+
+    ```bash
+    bun dev
+    # or
+    npm run dev
+    ```
+
+    Access the app at `http://localhost:5173`.
+
+4. **Build for Production**
+
+    ```bash
+    bun run build
+    ```
+
+    Output will be generated in the `dist/` folder.
+
+---
 
 ## 🎨 UI/UX Design Philosophy
 
-We moved away from the standard "spreadsheet" list view to a **Floating Card Interface**:
+### Floating Card Interface
 
-- **Visual Hierarchy**: Rounded cards (`border-radius: 2rem`) distinct from the background.
-- **Affordance**: Deep, soft shadows (`box-shadow`) imply interactivity (sliding).
-- **Spatial Awareness**: Significant negative space (`margin-bottom: 1.5rem`) prevents clutter.
-- **Color Semantics**:
-  - 🔴: Urgency (New Tasks).
-  - 🟡: Caution/Work (Ongoing).
-  - 🟢: Resolution (Done).
+We moved away from the standard list view to a **Floating Card Interface** with intentional spatial design:
 
-## ☁️ Deployment (CI/CD)
+- **Subtle curves** — `border-radius: 0.75rem` for modern card feel without excessive rounding
+- **Affordance** — Soft shadows (`box-shadow`) imply interactivity (sliding, tapping)
+- **Breathing room** — Horizontal padding on lists and vertical spacing between cards prevent visual congestion
+- **Color Semantics** — Red (urgency), Yellow (work-in-progress), Green (resolution)
+
+### Progressive Decay Visualization
+
+The most distinctive UI element. Task cards are **living objects** that change appearance over time:
+
+- CSS `filter: saturate()` and `opacity` transitions create smooth degradation
+- Left-border color accent provides at-a-glance severity indicator
+- `IonBadge` with emoji (`⏳ ⚠️ 💀`) gives precise idle-time context
+- All transitions are animated (`transition: 0.5s ease`) for smooth visual updates
+
+### Action Grouping
+
+All interactive controls (checkbox, edit, delete) are grouped on the right side (`slot="end"`) of each card, providing a consistent touch target zone.
+
+---
+
+## ☁️ Deployment
 
 The application is configured for **Cloudflare Pages**:
 
-- **Build Preset**: Vite / React Static.
-- **Output Directory**: `dist`.
-- **CI Pipeline**: Automatic deployments triggering on git push to `principal` branch.
+- **Build Preset**: Vite / React Static
+- **Output Directory**: `dist`
+- **CI Pipeline**: Automatic deployments on push to `principal` branch
+
+---
+
+## 🗺 Roadmap
+
+Potential future enhancements discussed in the architecture phase:
+
+- [ ] **Energy-Based Filtering** — Filter tasks by mental effort level (Deep Focus / Autopilot / Creative)
+- [ ] **Momentum Streak** — Gamification tracking consecutive days with completed tasks
+- [ ] **Offline-First + Sync** — IndexedDB local storage with cloud sync and conflict resolution
+- [ ] **State Machine** — Formal FSM (XState) for task lifecycle management
+- [ ] **Comprehensive Testing** — Unit (Vitest), Integration (Testing Library), E2E (Cypress)
+- [ ] **Keyboard Shortcuts** — Power-user navigation and action bindings
+- [ ] **Dark Mode** — Full theme toggle leveraging existing CSS variable architecture
+
+---
+
+> _Architected & Developed by **prog-ops** — june.mbs@gmail.com_
+
 
 
 
