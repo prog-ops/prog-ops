@@ -29,8 +29,6 @@ This project serves as a "Senior-Grade" architectural reference.
 3.  **Modern UI/UX**: Leverages Tailwind CSS v4 for zero-runtime overhead styling, ensuring high performance and Core Web Vitals scores.
 4.  **Data-Driven**: Includes a functional Dashboard with Chart.js integration, demonstrating real-world data visualization patterns from external APIs (`dummyjson.com`).
 
----
-
 ## 🏗 System Architecture & Design
 
 ### High-Level Architecture (C4 Context)
@@ -105,8 +103,6 @@ erDiagram
     }
 ```
 
----
-
 ## 🛠 Technology Stack
 
 | Category               | Technology       | Version            | Rationale                                                                               |
@@ -120,8 +116,6 @@ erDiagram
 | **Visualization**      | **Chart.js**     | 4.x                | Powerful, responsive charts for the Dashboard.                                          |
 | **Runtime**            | **Bun**          | 1.x                | Extremely fast JavaScript runtime and package manager (replaces Node/NPM).              |
 | **Environment**        | **Docker**       | Compose v3.8       | Containerizes the database for "one-command" setup.                                     |
-
----
 
 ## ✨ Key Features
 
@@ -142,8 +136,6 @@ erDiagram
     - Server-side rendering for initial load.
     - Client-side hydration for interactivity.
     - Optimized assets handling.
-
----
 
 ## 🚀 Getting Started
 
@@ -192,8 +184,6 @@ Follow these instructions to get the project up and running on your local machin
 
 Open [http://localhost:3000](http://localhost:3000) in the browser.
 
----
-
 ## ☁️ Deployment (Cloud Production)
 
 This project is architected to be deployed serverless-ly on **Vercel** with a managed PostgreSQL database (**Neon**).
@@ -223,7 +213,6 @@ This project is architected to be deployed serverless-ly on **Vercel** with a ma
 
 
 ---
-
 # NativeBoard - Vanilla Analytics Dashboard
 
 https://native-dashboard-nu.vercel.app/
@@ -247,7 +236,6 @@ https://native-dashboard-nu.vercel.app/
 
 
 ---
-
 # 🛍️ Shopping Gallery UI (Modern E-Commerce)
 
 https://shopping-gallery-t2yo.vercel.app/
@@ -290,7 +278,6 @@ This is engineered for performance and scalability.
 
 
 ---
-
 # 📧 Mailbox App
 
 https://mailbox-flame.vercel.app/
@@ -337,7 +324,6 @@ A modern, fast, and elegant personal communication dashboard built with **React 
 
 
 ---
-
 # Multiple Choice Question (MCQ) Quiz App
 
 https://prog-ops.github.io/multiplecq/
@@ -369,7 +355,6 @@ A modern, interactive quiz application built with React and TypeScript that uses
 
 
 ---
-
 # MERN Product Management App
 
 A robust, full-stack Product Management application built with the **MERN Stack** (MySQL, Express, React, Node.js).
@@ -406,7 +391,6 @@ https://github.com/user-attachments/assets/3c9738ba-f120-43ad-bbd0-2ed8933f715a
 
 
 ---
-
 # MERN Seller Products Monorepo
 
 https://github.com/prog-ops/seller_products
@@ -453,7 +437,6 @@ This project comes with the following features:
 
 
 ---
-
 # Full Stack MERN & Mediator Backend for ReactJS
 
 https://github.com/user-attachments/assets/c2e2965a-f39a-4cb7-9042-3a8fcf05cd82
@@ -489,7 +472,6 @@ https://github.com/user-attachments/assets/c2e2965a-f39a-4cb7-9042-3a8fcf05cd82
 
 
 ---
-
 # Drag & Drop Note
 
 https://github.com/prog-ops/dragdropnote
@@ -508,7 +490,6 @@ https://github.com/prog-ops/dragdropnote
 
 
 ---
-
 # Get The Bubble - Multiplayer Game
 
 https://github.com/prog-ops/GetTheBubbleMultiplayer
@@ -552,7 +533,6 @@ Get The Bubble is a fast-paced multiplayer game built with modern web technologi
 
 
 ---
-
 # Content Membership Platform
 
 https://github.com/prog-ops/membership-api
@@ -593,7 +573,6 @@ This application manages user access to articles and videos based on three diffe
 
 
 ---
-
 # Next.js + Firebase Auth
 
 A modern web application built with **Next.js 14**, **TypeScript**, and **Firebase**, featuring secure user authentication and a responsive user interface powered by **Tailwind CSS**.
@@ -617,12 +596,9 @@ A modern web application built with **Next.js 14**, **TypeScript**, and **Fireba
 
 
 ---
-
 # 🚀 Ionic React TaskFlow
 
 > **A Momentum-Driven Hybrid Mobile Task Management App — Built with Senior-Level Engineering Patterns**
-
----
 
 ## 📋 Executive Summary
 
@@ -639,8 +615,6 @@ TaskFlow implements two core differentiators:
 1. **Unidirectional State Flow** — Tasks progress through a strict lifecycle (`New → Ongoing → Done`) rather than floating freely on a Kanban board. This reduces decision fatigue and enforces forward momentum.
 
 2. **Task Decay** — A novel UX feature where tasks visually degrade over time when left untouched. This creates progressive psychological urgency without aggressive notifications, making stale work impossible to ignore.
-
----
 
 ## ✨ Key Features
 
@@ -678,8 +652,6 @@ New (Red) ──checkbox──▶ Ongoing (Yellow) ──checkbox──▶ Done 
 ```
 
 The Done tab intentionally has no forward action — completed tasks stay completed, and can only be edited or deleted.
-
----
 
 ## 🏗 Architecture & Engineering Decisions
 
@@ -763,8 +735,6 @@ flowchart LR
 - Context + `useCallback` + functional updaters provide identical guarantees with zero additional dependencies
 - Moving to a state library is straightforward if scope grows, since the Command Pattern abstraction is decoupled
 
----
-
 ## 🛠 Tech Stack
 
 | Category | Technology | Decision Rationale |
@@ -776,8 +746,6 @@ flowchart LR
 | **Routing** | React Router v5 + history v4 | Pinned for `@ionic/react-router` compatibility |
 | **Styling** | CSS3 Variables + Ionic Theming | CSS custom properties for responsive design and dark mode readiness |
 | **Persistence** | localStorage | Zero-config, instant, with migration layer for schema evolution |
-
----
 
 ## 🐛 Bugs Identified & Resolved
 
@@ -793,8 +761,6 @@ During a comprehensive audit, **8 bugs** were identified and systematically reso
 | 6 | **Unused import** — `useEffect` imported but never used | 🟢 Low | Now actively used for localStorage persistence |
 | 7 | **Debug logs in production** — `console.log` statements left in code | 🟢 Low | Removed |
 | 8 | **No data persistence** — All data lost on page refresh | 🟢 Low | Implemented localStorage with migration support |
-
----
 
 ## 💻 Installation & Development
 
@@ -838,8 +804,6 @@ During a comprehensive audit, **8 bugs** were identified and systematically reso
 
     Output will be generated in the `dist/` folder.
 
----
-
 ## 🎨 UI/UX Design Philosophy
 
 ### Floating Card Interface
@@ -864,8 +828,6 @@ The most distinctive UI element. Task cards are **living objects** that change a
 
 All interactive controls (checkbox, edit, delete) are grouped on the right side (`slot="end"`) of each card, providing a consistent touch target zone.
 
----
-
 ## ☁️ Deployment
 
 The application is configured for **Cloudflare Pages**:
@@ -873,8 +835,6 @@ The application is configured for **Cloudflare Pages**:
 - **Build Preset**: Vite / React Static
 - **Output Directory**: `dist`
 - **CI Pipeline**: Automatic deployments on push to `principal` branch
-
----
 
 ## 🗺 Roadmap
 
@@ -888,16 +848,53 @@ Potential future enhancements discussed in the architecture phase:
 - [ ] **Keyboard Shortcuts** — Power-user navigation and action bindings
 - [ ] **Dark Mode** — Full theme toggle leveraging existing CSS variable architecture
 
----
-
 > _Architected & Developed by **prog-ops** — june.mbs@gmail.com_
 
 
 
 
+---
+# Rust Native Calculator
+
+https://github.com/prog-ops/rust-native-calculator/blob/utama/target/debug/app.exe
+
+A modern, highly responsive, and themeable desktop calculator built with **Rust**, **eframe (egui)**, and **Win32 Native APIs**. 
+
+## 📌 Project Overview
+The main objective of this project is to create a dynamic, fluid desktop calculator application that deviates from traditional, statically-sized native interfaces. Instead, the application behaves more like a modern responsive web app (akin to React.js + CSS Flexbox/Grid) while executing directly as a native Windows binary. 
+
+## 🛠 Challenge & Solution
+
+### The Challenge
+1. **Fluid Responsiveness:** The calculator needed to be extremely flexible and resizable. Components such as typography, button dimensions, and panel spaces had to recalculate and scale proportionately in real-time as the user resizes the window, without relying on fixed grids.
+2. **Native OS-Level Theming:** Beyond typical app-level color changes, the user requested distinct native-level themes, notably a **"Blur Transparent"** mode. Achieving true glass-like transparency requires deep integration with the OS composition engine, which cross-platform frameworks like `eframe` do not handle out-of-the-box.
+3. **State Integrity:** Interactions within the UI (such as resetting the calculator's input state via the 'C' button) must strictly avoid causing side effects to the global application state (like the active theme or window initialization flags).
+
+### The Solution
+*   **Proportional Layout Engineering:** Instead of hardcoded pixel values, the UI relies on fractional subdivision using `egui`'s `ui.available_size()`. 25% of the viewport is dynamically reserved for the display panel. Font sizes use mathematical `clamp()` functions bounded to the `screen_rect().size().y`, and button dimensions are calculated recursively across the available width and height of the grid layout. This achieves a butter-smooth resizing experience identical to a modern web application.
+*   **Bridging eframe with Desktop Window Manager (DWM):** To achieve the *Blur Transparent* theme, an Unsafe FFI layer via the `windows-sys` crate was integrated. By intercepting the window handle (`HWND`) using `FindWindowW`, the application invokes `DwmEnableBlurBehindWindow` and `DwmSetWindowAttribute`. The `egui` environment's `window_fill` and `panel_fill` alpha channels are systematically stripped (set to `TRANSPARENT`) when this theme is active, allowing the native Windows composition effect to render beautifully behind the app logic.
+*   **Targeted State Mutability:** The `Calculator`'s global state (`struct Calculator`) was refined. Rather than utilizing `Default::default()` for runtime operations (which destructively wipes out theme persistence and initialization markers), a bespoke `reset()` method was implemented. This isolates the clearing of the calculation-specific fields (`display`, `current_op`, `previous_value`) from the application-level lifecycle fields (`theme`, `initialized`).
+
+## 🏗 Architecture & Clean Code Notes
+
+As a Senior Engineering endeavor, it is important to clarify the architectural scope of this iteration.
+
+**Was Clean Architecture Applied Here?**
+**No, strict Clean Architecture was intentionally deferred.** 
+
+The primary focus of this project phase was purely **functional delivery and technical feasibility**—specifically proving that complex behaviors (fluid immediate-mode UI layouts coupled with low-level Win32 FFI hooks) could operate seamlessly together. 
+
+As a result:
+*   The application currently utilizes a **Monolithic State Pattern** where the Domain Logic (math calculations), Presentation Logic (egui rendering), and Infrastructure Logic (Win32 FFI calls) all reside together inside a single `Calculator` struct within `main.rs`.
+*   While the code is clean, readable, and well-commented, it lacks boundary separations (e.g., isolating the FFI logic into a standalone `windows_integration` module, or decoupling the math state-machine so it can be independently unit-tested).
+
+**Future Improvements:**
+If this project were to be scaled, the next step would be applying Domain-Driven Design (DDD) principles: extracting the core calculator engine out of the UI layer, writing unit tests for the operator logic, and encapsulating the OS-specific native API calls behind an abstraction trait to maintain true cross-platform viability.
+
+
+
 
 ---
-
 # Movie CRUD App (Vue 3 + Quasar 2)
 
 https://github.com/prog-ops/movue
@@ -928,7 +925,6 @@ A fine custom Material UI calendar and password field with strict validations
 
 
 ---
-
 # Note React Native App
 
 https://github.com/prog-ops/NoteApp
