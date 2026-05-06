@@ -238,6 +238,8 @@ https://native-dashboard-nu.vercel.app/
 ---
 # Note History
 
+https://github.com/prog-ops/note-history/blob/utama/src-tauri/target/release/note-history.exe
+
 > Lightweight, portable desktop notes application with local-first storage, edit history tracking, and native Windows transparency effects — built on Tauri v2.
 
 ![Version](https://img.shields.io/badge/version-0.1.0-8B5CF6?style=flat-square)
