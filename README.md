@@ -847,18 +847,9 @@ https://github.com/user-attachments/assets/c2e2965a-f39a-4cb7-9042-3a8fcf05cd82
 
 Link:
 https://dragdropnote.vercel.app/
-see more:
+
+See more:
 https://github.com/prog-ops/dragdropnote
-
-- Vite
-- React
-- Zustand
-- pnpm
-- Permanent local storage
-
-![Screenshot_154](https://github.com/prog-ops/dragdropnote/assets/59245989/f563c419-6001-410c-95f2-bd104abf5f05)
-
-![Screenshot_155](https://github.com/prog-ops/dragdropnote/assets/59245989/6222c1de-11c0-45c5-9b41-c8efb4bf6989)
 
 
 
