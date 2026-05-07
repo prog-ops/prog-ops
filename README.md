@@ -1242,8 +1242,7 @@ If this project were to be scaled, the next step would be applying Domain-Driven
 
 
 
----
-# Movie CRUD App (Vue 3 + Quasar 2)
+# ✔️ Movie CRUD App (Vue 3 + Quasar 2)
 
 https://github.com/prog-ops/movue
 
@@ -1266,8 +1265,7 @@ deployment modes (SPA, SSR, PWA, and others), with a movie list/detail flow.
 
 
 
----
-# Custom Material UI calendar and password field with strict validations
+# ✔️ Custom Material UI calendar and password field with strict validations
 
 https://prog-ops.github.io/namepasswdncalendarinput/
 
@@ -1276,8 +1274,7 @@ A fine custom Material UI calendar and password field with strict validations
 
 
 
----
-# Note React Native App
+# ✔️ Note React Native App
 
 https://github.com/prog-ops/NoteApp
 
