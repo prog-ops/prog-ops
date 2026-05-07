@@ -217,7 +217,7 @@ This project is architected to be deployed serverless-ly on **Vercel** with a ma
 
 https://native-dashboard-nu.vercel.app/
 
-## Features
+### Features
 
 - **Zero Framework**: Built with pure Vanilla JS and Web Components.
 - **Performance First**: Uses `requestIdleCallback`, code splitting, and efficient DOM updates.
@@ -225,7 +225,7 @@ https://native-dashboard-nu.vercel.app/
 - **Modern Tooling**: Vite, Vitest, ESLint, Prettier, PostCSS.
 - **Accessible**: Semantic HTML and ARIA best practices.
 
-## Project Structure
+### Project Structure
 
 - `src/core`: Core logic (Router, Store, Component base).
 - `src/components`: Reusable Web Components.
@@ -249,9 +249,7 @@ https://drive.google.com/file/d/1IDfBjIxcZG0aowIKjYQfByM8m42IXrce/view?usp=drive
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Platform](https://img.shields.io/badge/platform-Windows-0078D6?style=flat-square&logo=windows&logoColor=white)
 
----
-
-## Table of Contents
+### Table of Contents
 
 - [Overview](#overview)
 - [Key Features](#key-features)
@@ -265,15 +263,13 @@ https://drive.google.com/file/d/1IDfBjIxcZG0aowIKjYQfByM8m42IXrce/view?usp=drive
 - [Configuration](#configuration)
 - [Future Roadmap](#future-roadmap)
 
----
-
-## Overview
+### Overview
 
 Note History is a portable, self-contained desktop application designed to store notes as individual JSON files alongside the executable. This enables a **zero-database, zero-cloud** architecture where the entire app — including its data — can be moved between machines by simply copying the folder.
 
 The application is built with a **Rust backend** (Tauri v2) handling file I/O and Windows DWM integration, and a **React 19 frontend** providing a modern glassmorphism UI with real-time inline editing.
 
-### Design Philosophy
+**Design Philosophy**
 
 | Principle | Implementation |
 |---|---|
@@ -282,9 +278,7 @@ The application is built with a **Rust backend** (Tauri v2) handling file I/O an
 | **Native integration** | DWM Mica Alt / solid color themes via Win32 API, custom frameless titlebar |
 | **Minimal footprint** | ~80 KB of source code (excluding dependencies), single binary output |
 
----
-
-## Key Features
+### Key Features
 
 - **CRUD Operations** — Create, read, update, and delete notes with full error handling and toast feedback
 - **Edit History Tracking** — Every edit automatically snapshots the previous content with a timestamp, displayed in a collapsible accordion per note
@@ -296,11 +290,9 @@ The application is built with a **Rust backend** (Tauri v2) handling file I/O an
 - **Open in Explorer** — One-click to open the notes directory in Windows Explorer
 - **Indonesian Locale** — Date formatting with `id-ID` locale, Indonesian UI strings
 
----
+### Architecture
 
-## Architecture
-
-### High-Level Component Tree
+**High-Level Component Tree**
 
 ```
 App (Orchestrator — state management, CRUD handlers, keyboard shortcuts)
@@ -313,7 +305,7 @@ App (Orchestrator — state management, CRUD handlers, keyboard shortcuts)
 └── ConfirmDialog         Reusable modal for destructive action confirmation
 ```
 
-### Backend (Rust) Command Surface
+**Backend (Rust) Command Surface**
 
 | Tauri Command | Signature | Description |
 |---|---|---|
@@ -324,7 +316,7 @@ App (Orchestrator — state management, CRUD handlers, keyboard shortcuts)
 | `open_notes_folder` | `() → Result<()>` | Spawns `explorer.exe` pointing to the notes directory |
 | `apply_window_theme` | `(window, config) → Result<()>` | Applies DWM backdrop attributes and manages frame margins |
 
-### Frontend Hook Layer
+**Frontend Hook Layer**
 
 | Hook | Responsibility |
 |---|---|
@@ -332,11 +324,9 @@ App (Orchestrator — state management, CRUD handlers, keyboard shortcuts)
 | `useTheme` | Theme state, localStorage persistence, CSS variable mutation, and Tauri IPC for DWM |
 | `useToast` | Ephemeral notification queue with auto-cleanup via `setTimeout` |
 
----
+### Tech Stack
 
-## Tech Stack
-
-### Frontend
+**Frontend**
 
 | Technology | Version | Role |
 |---|---|---|
@@ -346,7 +336,7 @@ App (Orchestrator — state management, CRUD handlers, keyboard shortcuts)
 | Vanilla CSS | — | Design system with CSS custom properties (no utility frameworks) |
 | `@tauri-apps/api` | v2 | IPC bridge between webview and Rust backend |
 
-### Backend
+**Backend**
 
 | Technology | Version | Role |
 |---|---|---|
@@ -357,16 +347,14 @@ App (Orchestrator — state management, CRUD handlers, keyboard shortcuts)
 | Chrono | 0.4 | Timestamp generation with local timezone support |
 | `windows` crate | 0.58 | Direct Win32 DWM API calls for backdrop effects |
 
-### Tooling
+**Tooling**
 
 | Tool | Purpose |
 |---|---|
 | Bun | Package manager and script runner (configured in `tauri.conf.json`) |
 | Cargo | Rust dependency management and compilation |
 
----
-
-## Project Structure
+### Project Structure
 
 ```
 tauri-app-1/
@@ -412,11 +400,9 @@ tauri-app-1/
         └── lib.rs                # All Tauri commands, structs, and DWM integration
 ```
 
----
+### Data Flow
 
-## Data Flow
-
-### Note Persistence Model
+**Note Persistence Model**
 
 ```
 notes/<uuid>.json
@@ -434,7 +420,7 @@ notes/<uuid>.json
 }
 ```
 
-### Edit History Logic
+**Edit History Logic**
 
 ```
 save_note(id, newContent)
@@ -449,7 +435,7 @@ save_note(id, newContent)
    └─ File not found → Create new note with provided ID
 ```
 
-### Theme Application Pipeline
+**Theme Application Pipeline**
 
 ```
 User selects theme
@@ -463,11 +449,9 @@ User selects theme
             → Rust: Remove WS_CAPTION, force SWP_FRAMECHANGED redraw
 ```
 
----
+### Challenges & Solutions
 
-## Challenges & Solutions
-
-### 1. Frameless Window with Native Transparency
+**1. Frameless Window with Native Transparency**
 
 **Challenge:**
 Achieving a truly borderless window with DWM Mica Alt backdrop on Tauri v2 requires bypassing the standard window decoration system while maintaining proper window dragging, resizing, and control button behavior. The Tauri webview and Win32 compositor have different expectations about frame ownership.
@@ -479,7 +463,7 @@ Achieving a truly borderless window with DWM Mica Alt backdrop on Tauri v2 requi
 - Built a fully custom `<Titlebar>` component using Tauri's `data-tauri-drag-region` attribute for drag support, with explicit Tauri API calls for minimize/maximize/close
 - Required specific Tauri capabilities (`core:window:allow-start-dragging`, `core:window:allow-set-decorations`) to be declared in `default.json`
 
-### 2. Portable, Self-Contained Storage Without a Database
+**2. Portable, Self-Contained Storage Without a Database**
 
 **Challenge:**
 Traditional desktop apps rely on `%APPDATA%` or embedded SQLite, which ties data to a specific user profile or machine. The goal was fully portable storage where copying the application folder preserves all data.
@@ -494,7 +478,7 @@ Traditional desktop apps rely on `%APPDATA%` or embedded SQLite, which ties data
 
 **Trade-off:** No indexing or relational queries — search is performed client-side in O(n) over all note content. Acceptable for the expected data volume (hundreds to low thousands of notes).
 
-### 3. Edit History Without Bloating File Size
+**3. Edit History Without Bloating File Size**
 
 **Challenge:**
 Tracking every edit as a full content snapshot can cause JSON files to grow unboundedly, especially for frequently edited notes with long content.
@@ -507,7 +491,7 @@ Tracking every edit as a full content snapshot can cause JSON files to grow unbo
 
 **Future consideration:** Implement a configurable history depth limit or delta-based compression for power users.
 
-### 4. Bidirectional Theme Synchronization (CSS ↔ DWM)
+**4. Bidirectional Theme Synchronization (CSS ↔ DWM)**
 
 **Challenge:**
 The window backdrop is managed by the OS compositor (DWM), while the UI's visual layer is CSS in a webview. Switching between blur-transparent and solid-color modes requires synchronized updates to both layers — and they have completely different APIs.
@@ -520,7 +504,7 @@ The window backdrop is managed by the OS compositor (DWM), while the UI's visual
   4. **Tauri IPC** to the Rust backend, which applies DWM attributes and frame margins
 - Mode switching (blur → solid) resets the backdrop type to `1` (None) and frame margins to `0`, while also overriding CSS variables to use opaque colors instead of alpha-blended values
 
-### 5. Concurrent State Consistency in React
+**5. Concurrent State Consistency in React**
 
 **Challenge:**
 Multiple async operations (create, update, delete) can interleave, causing stale data to render if not carefully managed. The `useNotes` hook performs Tauri IPC calls that return asynchronously, and the user might trigger additional actions before the first completes.
@@ -531,7 +515,7 @@ Multiple async operations (create, update, delete) can interleave, causing stale
 - The `NoteItem` component syncs its local `editValue` with the parent's note data via a `useEffect` that only runs when not actively editing, preventing jarring resets mid-edit
 - Loading state is managed with `try/finally` to guarantee the loading indicator is dismissed even on error
 
-### 6. Tauri v2 Security Capabilities Model
+**6. Tauri v2 Security Capabilities Model**
 
 **Challenge:**
 Tauri v2 introduced a strict capability-based permission system where each window operation must be explicitly allowed. The default scaffold does not include permissions for custom titlebar actions (minimize, maximize, close, drag), causing silent failures.
@@ -550,17 +534,15 @@ Tauri v2 introduced a strict capability-based permission system where each windo
 - Scoped all permissions to the `"main"` window only, following the principle of least privilege
 - CSP is set to `null` in `tauri.conf.json` for development flexibility (should be tightened for production)
 
----
+### Getting Started
 
-## Getting Started
-
-### Prerequisites
+**Prerequisites**
 
 - **Rust** (stable, 2021 edition) — [Install via rustup](https://rustup.rs/)
 - **Bun** (or Node.js) — [Install Bun](https://bun.sh/)
 - **Windows 11** — Required for Mica Alt backdrop effects (Windows 10 will fall back gracefully)
 
-### Installation
+**Installation**
 
 ```bash
 # Clone the repository
@@ -574,7 +556,7 @@ bun install
 bun run tauri dev
 ```
 
-### Build for Production
+**Build for Production**
 
 ```bash
 # Creates an optimized release binary
@@ -584,9 +566,7 @@ bun run tauri build
 The compiled binary and installer will be available in `src-tauri/target/release/`.
 The `notes/` folder will be created alongside the executable on first run.
 
----
-
-## Keyboard Shortcuts
+### Keyboard Shortcuts
 
 | Shortcut | Context | Action |
 |---|---|---|
@@ -598,11 +578,9 @@ The `notes/` folder will be created alongside the executable on first run.
 | `Escape` | Edit mode | Cancel editing |
 | `Escape` | Dialog / Theme Picker | Close overlay |
 
----
+### Configuration
 
-## Configuration
-
-### Tauri Window Configuration (`tauri.conf.json`)
+**Tauri Window Configuration (`tauri.conf.json`)**
 
 | Property | Value | Notes |
 |---|---|---|
@@ -612,7 +590,7 @@ The `notes/` folder will be created alongside the executable on first run.
 | `minWidth` / `minHeight` | `700×500` | Prevents layout breakage at extreme sizes |
 | `width` / `height` | `960×680` | Default window dimensions |
 
-### Vite Dev Server (`vite.config.ts`)
+**Vite Dev Server (`vite.config.ts`)**
 
 | Property | Value | Notes |
 |---|---|---|
@@ -620,9 +598,7 @@ The `notes/` folder will be created alongside the executable on first run.
 | `host` | `127.0.0.1` | Localhost only (overridable via `TAURI_DEV_HOST`) |
 | `ignored` | `**/src-tauri/**` | Prevents file watcher from triggering on Rust rebuilds |
 
----
-
-## Future Roadmap
+### Future Roadmap
 
 - [ ] **History depth limit** — Configurable maximum number of edit history entries per note
 - [ ] **Markdown rendering** — Toggle between raw text and rendered markdown preview
