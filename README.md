@@ -754,7 +754,7 @@ A modern, interactive quiz application built with React and TypeScript that uses
 
 
 ---
-# MERN Product Management App
+# Product Management App (MySQL-Express-React-NodeJS)
 
 A robust, full-stack Product Management application built with the **MERN Stack** (MySQL, Express, React, Node.js).
 This application features a modern, responsive user interface designed with **Tailwind CSS** using a "Tritone" dark theme, and a powerful backend with server-side pagination and search capabilities.
@@ -795,6 +795,10 @@ https://github.com/user-attachments/assets/3c9738ba-f120-43ad-bbd0-2ed8933f715a
 see more:
 https://github.com/prog-ops/seller_products
 
+
+
+
+---
 # Github Users App
 
 https://github.com/prog-ops/mygithub_user_repos
