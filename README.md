@@ -619,29 +619,32 @@ A high-performance, responsive e-commerce homepage interface built with **React*
 
 This project demonstrates modern frontend architecture, focusing on **Core Web Vitals (CWV)**, seamless UX, and efficient state management without heavy dependencies.
 
-## 🚀 Key Highlights & Best Practices
+### 🚀 Key Highlights & Best Practices
 
 This is engineered for performance and scalability.
 
-### ⚡ Performance & Optimization
+**⚡ Performance & Optimization**
+
 - **Hybrid State Management**:
     - **Server State**: Handled by **TanStack Query (React Query)** with caching logic (`staleTime`, `cacheTime`) to prevent redundant network requests and ensure instant navigation.
     - **Client State**: Managed by **Zustand** for a lightweight, boilerplate-free global store (used for filtering logic).
 - **LCP (Largest Contentful Paint) Optimized**: The main carousel prioritizes the active slide image (`loading="eager"`) while lazy-loading off-screen images.
 - **CLS (Cumulative Layout Shift) Prevention**: All image containers utilize aspect-ratio placeholders and skeleton loaders to prevent layout jumps during data fetching.
 
-### 🎨 Modern UX/UI Architecture
+**🎨 Modern UX/UI Architecture**
+
 - **3D "Cover Flow" Carousel**: Custom-built CSS 3D Transform carousel (No heavy libraries like `slick` or `swiper`). Features touch swipe gestures, auto-play with hover-pause, and smooth hardware-accelerated transitions.
 - **Smart Image Fallbacks**: A robust `ImageWithFallback` component that gracefully handles broken URLs (404s) or loading errors by showing a polished placeholder.
 - **Instant Filtering**: Category selection performs client-side filtering on cached data, resulting in **zero-latency** UI updates.
 - **Indeterminate Loading States**: Custom animated progress bars instead of generic spinners for a perceived faster loading experience.
 
-### 🛠 Code Quality
+**🛠 Code Quality**
+
 - **Separation of Concerns**: Logic is decoupled from UI. API calls are isolated in hooks/queries, and complex UI logic is separated into reusable components.
 - **DRY (Don't Repeat Yourself)**: Reusable components for `Loading`, `ImageWithFallback`, and consistent CSS variables.
 - **Mobile-First Design**: Fully responsive Grid and Flex layouts using CSS Grid (`repeat(auto-fit)` logic) and Media Queries.
 
-## 📦 Tech Stack
+### 📦 Tech Stack
 
 - **Core**: React 18, Vite
 - **State Management**: Zustand (Client), TanStack Query (Server/Async)
@@ -659,29 +662,29 @@ https://mailbox-flame.vercel.app/
 
 A modern, fast, and elegant personal communication dashboard built with **React 19** and **Vite**. This application combines a seamless email-style inbox with a robust task management system, all wrapped in a premium, responsive interface inspired by modern design principles.
 
-## ✨ Key Features
+### ✨ Key Features
 
-### 📩 Smart Inbox
+**📩 Smart Inbox**
 
 - **Real-time Feel**: Smooth transitions between inbox lists and conversation threads.
 - **Dynamic Conversations**: Simulation of incoming messages and deep threading for a "live" chat experience.
 - **Rich Media**: Integrated avatars and clear typography for better readability.
 - **Searchable**: Easily filter through your messages.
 
-### ✅ Integrated Task Management
+**✅ Integrated Task Management**
 
 - **Task Organization**: Create, edit, and delete tasks with ease.
 - **Tagging System**: Categorize tasks using a beautiful, color-coded tag system (e.g., Important, Meetings, Client Related).
 - **Filtering**: Quickly toggle between "Personal Errands", "Urgent To Do", and "My Tasks".
 - **Visual Feedback**: Clear indicators for completed tasks and expanded task details.
 
-### 🚀 Premium User Experience
+**🚀 Premium User Experience**
 
 - **Inter-view Navigation**: Seamlessly switch between Inbox and Tasks using a hover-triggered Floating Action Button (FAB).
 - **PWA Ready**: Installable on mobile and desktop devices with offline support.
 - **Responsive Layout**: Designed to feel native on all screen sizes, from mobile phones to high-res monitors.
 
-## 🛠️ Technology Stack
+### 🛠️ Technology Stack
 
 | Layer                | Technology                                                          |
 | :------------------- | :------------------------------------------------------------------ |
@@ -705,7 +708,7 @@ https://prog-ops.github.io/multiplecq/
 
 A modern, interactive quiz application built with React and TypeScript that uses the Open Trivia DB API to deliver multiple choice questions across various categories and difficulty levels.
 
-## Features
+### Features
 
 - 🔐 **User Authentication** - Simple login system to access the quiz
 - 🎯 **Customizable Quiz Settings**:
@@ -717,7 +720,7 @@ A modern, interactive quiz application built with React and TypeScript that uses
 - 💾 **State Persistence** - Quiz state is persisted using Redux Persist
 - 🎨 **Modern UI** - Clean and responsive user interface
 
-## Tech Stack
+### Tech Stack
 
 - **React 17** - UI library
 - **TypeScript** - Type safety
@@ -737,7 +740,7 @@ This application features a modern, responsive user interface designed with **Ta
 
 https://github.com/user-attachments/assets/3c9738ba-f120-43ad-bbd0-2ed8933f715a
 
-## 🚀 Key Features
+### 🚀 Key Features
 
 - **CRUD Operations**: Create, Read, Update, and Delete products seamlessly.
 - **Image Upload**: Support for uploading product images (saved locally).
@@ -745,9 +748,9 @@ https://github.com/user-attachments/assets/3c9738ba-f120-43ad-bbd0-2ed8933f715a
 - **Responsive UI**: Mobile-first design using Tailwind CSS with a custom Dark Mode (Tritone Theme).
 - **Database Sync**: Automatic table creation using Sequelize.
 
-## 🛠️ Tech Stack
+### 🛠️ Tech Stack
 
-### Backend (`/be`)
+**Backend (`/be`)**
 
 - **Runtime**: Node.js
 - **Framework**: Express.js (v5)
@@ -755,7 +758,7 @@ https://github.com/user-attachments/assets/3c9738ba-f120-43ad-bbd0-2ed8933f715a
 - **ORM**: Sequelize
 - **File Upload**: express-fileupload
 
-### Frontend (`/fe`)
+**Frontend (`/fe`)**
 
 - **Framework**: React (v18)
 - **Styling**: Tailwind CSS (v4)
@@ -788,13 +791,13 @@ https://github.com/prog-ops/mygithub_user_repos
 
 https://github.com/user-attachments/assets/c2e2965a-f39a-4cb7-9042-3a8fcf05cd82
 
-## Apps
+### Apps
 
 1. NodeJS - MySQL Yelp-like backend
 2. NodeJS server as an intermediary between ReactJS frontend and Yelp API
 3. ReactJS frontend
 
-## Features
+### Features
 
 1. Backend
    - NodeJS
@@ -837,11 +840,11 @@ https://github.com/prog-ops/GetTheBubbleMultiplayer
 
 A real-time multiplayer game where players compete to collect bubbles while strategically avoiding or engaging with opponents.
 
-## Overview
+### Overview
 
 Get The Bubble is a fast-paced multiplayer game built with modern web technologies. Players navigate an arena, collecting yellow bubbles to score points while using clever movement strategies to outmaneuver opponents. The game features intelligent collision detection that distinguishes between aggressive and passive movements, adding a strategic layer to player interactions.
 
-## Features
+### Features
 
 🎮 Real-time multiplayer gameplay
 🏆 Strategic collision system (active vs passive hits)
@@ -850,7 +853,7 @@ Get The Bubble is a fast-paced multiplayer game built with modern web technologi
 📱 Responsive design with HTML5
 🔧 Optimized build process with Webpack
 
-## Technology Stack
+### Technology Stack
 
 - Node.js - Backend server and game logic
 - Socket.io - Real-time bidirectional communication
@@ -858,7 +861,7 @@ Get The Bubble is a fast-paced multiplayer game built with modern web technologi
 - Webpack - Module bundler and build optimization
 - HTML5 - Frontend structure and styling
 
-## Game Rules
+### Game Rules
 
 1. Setup: Game starts when players connect; wait for other players to join
 2. Objective: Collect as many small yellow bubbles as possible
@@ -881,7 +884,8 @@ https://github.com/prog-ops/membership-api
 Welcome to the Content Membership Platform repository! This is a full-stack web application built as a case study to implement a membership system with various levels of access rights to digital content.
 This application manages user access to articles and videos based on three different membership tiers (Type A, B, and C), and supports both manual and social authentication (Google & Facebook).
 
-## ✨ Key Features
+### ✨ Key Features
+
 - **Complete Authentication:**
     - Manual registration and login with validation.
     - Social media login using Google and Facebook via Laravel Socialite.
@@ -893,21 +897,22 @@ This application manages user access to articles and videos based on three diffe
 - **User Dashboard:** A personalized dashboard page displaying a summary of the user's access rights.
 - **Modern Architecture:** Built with a monolithic SPA approach using Laravel and Inertia.js for a fast and reactive user experience without needing to build a separate API.
 
-## 💻 Tech Stack
-### Backend
+### 💻 Tech Stack
+
+**Backend**
 - PHP 8.x
 - Laravel 10.x
 - Laravel Socialite (for Social Login)
 - PostgreSQL database
 
-### Frontend
+**Frontend**
 - React.js
 - TypeScript
 - Inertia.js (backend & frontend bridge)
 - Tailwind CSS
 - Vite (build tool)
 
-### Development Environment
+**Development Environment**
 - Laragon
 
 
@@ -918,7 +923,7 @@ This application manages user access to articles and videos based on three diffe
 
 A modern web application built with **Next.js 14**, **TypeScript**, and **Firebase**, featuring secure user authentication and a responsive user interface powered by **Tailwind CSS**.
 
-## 🚀 Tech Stack
+### 🚀 Tech Stack
 
 - **Framework:** [Next.js 14](https://nextjs.org/) (App Router)
 - **Language:** [TypeScript](https://www.typescriptlang.org/)
@@ -926,7 +931,7 @@ A modern web application built with **Next.js 14**, **TypeScript**, and **Fireba
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **State Management (Auth):** [React Firebase Hooks](https://github.com/CSFrequency/react-firebase-hooks)
 
-## ✨ Features
+### ✨ Features
 
 - **Secure Authentication:** Complete Sign-in and Sign-up flows using Firebase Authentication.
 - **Protected Routes:** Client-side route protection ensuring only authenticated users can access the dashboard.
@@ -941,15 +946,15 @@ A modern web application built with **Next.js 14**, **TypeScript**, and **Fireba
 
 > **A Momentum-Driven Hybrid Mobile Task Management App — Built with Senior-Level Engineering Patterns**
 
-## 📋 Executive Summary
+### 📋 Executive Summary
 
-### The Problem
+**The Problem**
 
 Traditional task management tools (Jira, Trello, Asana) often introduce **cognitive overload** for individual users and micro-teams. They optimize for features, not for action. Users waste time configuring boards and workflows instead of actually getting things done.
 
 Worse, stale tasks accumulate silently. There's no visual feedback for items sitting untouched for days — they look exactly the same as fresh ones.
 
-### The Solution
+**The Solution**
 
 TaskFlow implements two core differentiators:
 
@@ -957,9 +962,9 @@ TaskFlow implements two core differentiators:
 
 2. **Task Decay** — A novel UX feature where tasks visually degrade over time when left untouched. This creates progressive psychological urgency without aggressive notifications, making stale work impossible to ignore.
 
-## ✨ Key Features
+### ✨ Key Features
 
-### 🔥 Task Decay (Unique Feature)
+**🔥 Task Decay (Unique Feature)**
 
 Tasks are not static. They **age** over time based on `lastTouchedAt` timestamp:
 
@@ -972,7 +977,7 @@ Tasks are not static. They **age** over time based on `lastTouchedAt` timestamp:
 
 Editing or moving a task **resets the decay timer**, rewarding interaction.
 
-### ↩️ Undo/Redo (Command Pattern)
+**↩️ Undo/Redo (Command Pattern)**
 
 Every mutation (add, delete, edit, move) is encapsulated as a reversible **Command** object. This enables:
 
@@ -980,11 +985,11 @@ Every mutation (add, delete, edit, move) is encapsulated as a reversible **Comma
 - Accessible via toolbar buttons on every tab
 - Commands are **pure data** (not closures), making them serializable and debuggable
 
-### 💾 Local Persistence
+**💾 Local Persistence**
 
 All data is automatically persisted to `localStorage` with seamless migration support for schema changes.
 
-### 📱 Linear Flow Architecture
+**📱 Linear Flow Architecture**
 
 Tasks progress through three phases with a single interaction (checkbox tap):
 
@@ -994,9 +999,9 @@ New (Red) ──checkbox──▶ Ongoing (Yellow) ──checkbox──▶ Done 
 
 The Done tab intentionally has no forward action — completed tasks stay completed, and can only be edited or deleted.
 
-## 🏗 Architecture & Engineering Decisions
+### 🏗 Architecture & Engineering Decisions
 
-### State Transition Diagram
+**State Transition Diagram**
 
 ```mermaid
 stateDiagram-v2
@@ -1017,7 +1022,7 @@ stateDiagram-v2
     note right of Done: Terminal state.\nNo forward action.\nEdit & delete only.
 ```
 
-### Component Architecture (Atomic Design)
+**Component Architecture (Atomic Design)**
 
 ```
 src/
@@ -1044,7 +1049,7 @@ src/
 | **Organisms** | Page-level controllers with filtered state | `Tab1`, `Tab2`, `Tab3` |
 | **Templates** | Routing and layout | `App.tsx` |
 
-### Data Flow: Context API + Command Pattern
+**Data Flow: Context API + Command Pattern**
 
 ```mermaid
 flowchart LR
@@ -1064,19 +1069,19 @@ flowchart LR
     HISTORY -->|"redo()"| APPLY
 ```
 
-**Why Command Pattern over simple state updates?**
+_Why Command Pattern over simple state updates?_
 
 - Every action is **reversible** — undo restores exact previous state, including timestamps
 - Commands are **data, not closures** — avoids stale closure bugs, makes debugging trivial
 - The pattern is a **recognized GoF design pattern** that demonstrates architectural thinking beyond CRUD
 
-**Why Context API over Redux/Zustand?**
+_Why Context API over Redux/Zustand?_
 
 - Application scope is contained — a single domain (tasks) with 4 mutations
 - Context + `useCallback` + functional updaters provide identical guarantees with zero additional dependencies
 - Moving to a state library is straightforward if scope grows, since the Command Pattern abstraction is decoupled
 
-## 🛠 Tech Stack
+### 🛠 Tech Stack
 
 | Category | Technology | Decision Rationale |
 |:---------|:-----------|:-------------------|
@@ -1088,7 +1093,7 @@ flowchart LR
 | **Styling** | CSS3 Variables + Ionic Theming | CSS custom properties for responsive design and dark mode readiness |
 | **Persistence** | localStorage | Zero-config, instant, with migration layer for schema evolution |
 
-## 🐛 Bugs Identified & Resolved
+### 🐛 Bugs Identified & Resolved
 
 During a comprehensive audit, **8 bugs** were identified and systematically resolved:
 
@@ -1103,14 +1108,14 @@ During a comprehensive audit, **8 bugs** were identified and systematically reso
 | 7 | **Debug logs in production** — `console.log` statements left in code | 🟢 Low | Removed |
 | 8 | **No data persistence** — All data lost on page refresh | 🟢 Low | Implemented localStorage with migration support |
 
-## 💻 Installation & Development
+### 💻 Installation & Development
 
-### Prerequisites
+**Prerequisites**
 
 - Node.js v18+
 - Bun (recommended) or npm
 
-### Steps
+**Steps**
 
 1. **Clone the Repository**
 
@@ -1145,9 +1150,9 @@ During a comprehensive audit, **8 bugs** were identified and systematically reso
 
     Output will be generated in the `dist/` folder.
 
-## 🎨 UI/UX Design Philosophy
+### 🎨 UI/UX Design Philosophy
 
-### Floating Card Interface
+**Floating Card Interface**
 
 We moved away from the standard list view to a **Floating Card Interface** with intentional spatial design:
 
@@ -1156,7 +1161,7 @@ We moved away from the standard list view to a **Floating Card Interface** with 
 - **Breathing room** — Horizontal padding on lists and vertical spacing between cards prevent visual congestion
 - **Color Semantics** — Red (urgency), Yellow (work-in-progress), Green (resolution)
 
-### Progressive Decay Visualization
+**Progressive Decay Visualization**
 
 The most distinctive UI element. Task cards are **living objects** that change appearance over time:
 
@@ -1165,11 +1170,11 @@ The most distinctive UI element. Task cards are **living objects** that change a
 - `IonBadge` with emoji (`⏳ ⚠️ 💀`) gives precise idle-time context
 - All transitions are animated (`transition: 0.5s ease`) for smooth visual updates
 
-### Action Grouping
+**Action Grouping**
 
 All interactive controls (checkbox, edit, delete) are grouped on the right side (`slot="end"`) of each card, providing a consistent touch target zone.
 
-## ☁️ Deployment
+### ☁️ Deployment
 
 The application is configured for **Cloudflare Pages**:
 
@@ -1177,7 +1182,7 @@ The application is configured for **Cloudflare Pages**:
 - **Output Directory**: `dist`
 - **CI Pipeline**: Automatic deployments on push to `principal` branch
 
-## 🗺 Roadmap
+### 🗺 Roadmap
 
 Potential future enhancements discussed in the architecture phase:
 
@@ -1201,22 +1206,24 @@ https://github.com/prog-ops/rust-native-calculator/blob/utama/target/debug/app.e
 
 A modern, highly responsive, and themeable desktop calculator built with **Rust**, **eframe (egui)**, and **Win32 Native APIs**. 
 
-## 📌 Project Overview
+### 📌 Project Overview
 The main objective of this project is to create a dynamic, fluid desktop calculator application that deviates from traditional, statically-sized native interfaces. Instead, the application behaves more like a modern responsive web app (akin to React.js + CSS Flexbox/Grid) while executing directly as a native Windows binary. 
 
-## 🛠 Challenge & Solution
+### 🛠 Challenge & Solution
 
-### The Challenge
+**The Challenge**
+
 1. **Fluid Responsiveness:** The calculator needed to be extremely flexible and resizable. Components such as typography, button dimensions, and panel spaces had to recalculate and scale proportionately in real-time as the user resizes the window, without relying on fixed grids.
 2. **Native OS-Level Theming:** Beyond typical app-level color changes, the user requested distinct native-level themes, notably a **"Blur Transparent"** mode. Achieving true glass-like transparency requires deep integration with the OS composition engine, which cross-platform frameworks like `eframe` do not handle out-of-the-box.
 3. **State Integrity:** Interactions within the UI (such as resetting the calculator's input state via the 'C' button) must strictly avoid causing side effects to the global application state (like the active theme or window initialization flags).
 
-### The Solution
+**The Solution**
+
 *   **Proportional Layout Engineering:** Instead of hardcoded pixel values, the UI relies on fractional subdivision using `egui`'s `ui.available_size()`. 25% of the viewport is dynamically reserved for the display panel. Font sizes use mathematical `clamp()` functions bounded to the `screen_rect().size().y`, and button dimensions are calculated recursively across the available width and height of the grid layout. This achieves a butter-smooth resizing experience identical to a modern web application.
 *   **Bridging eframe with Desktop Window Manager (DWM):** To achieve the *Blur Transparent* theme, an Unsafe FFI layer via the `windows-sys` crate was integrated. By intercepting the window handle (`HWND`) using `FindWindowW`, the application invokes `DwmEnableBlurBehindWindow` and `DwmSetWindowAttribute`. The `egui` environment's `window_fill` and `panel_fill` alpha channels are systematically stripped (set to `TRANSPARENT`) when this theme is active, allowing the native Windows composition effect to render beautifully behind the app logic.
 *   **Targeted State Mutability:** The `Calculator`'s global state (`struct Calculator`) was refined. Rather than utilizing `Default::default()` for runtime operations (which destructively wipes out theme persistence and initialization markers), a bespoke `reset()` method was implemented. This isolates the clearing of the calculation-specific fields (`display`, `current_op`, `previous_value`) from the application-level lifecycle fields (`theme`, `initialized`).
 
-## 🏗 Architecture & Clean Code Notes
+### 🏗 Architecture & Clean Code Notes
 
 As a Senior Engineering endeavor, it is important to clarify the architectural scope of this iteration.
 
@@ -1247,7 +1254,7 @@ for state management, and **Axios** for HTTP requests.
 The project uses the Quasar CLI and is structured to support multiple
 deployment modes (SPA, SSR, PWA, and others), with a movie list/detail flow.
 
-## Tech Stack
+### Tech Stack
 
 - **Framework**: Vue 3 + Quasar 2 (SPA mode, Vite bundler)
 - **Language**: TypeScript
@@ -1256,6 +1263,10 @@ deployment modes (SPA, SSR, PWA, and others), with a movie list/detail flow.
 - **Styling**: Sass/SCSS
 - **Tooling**: ESLint (with Prettier), Jest, pnpm
 
+
+
+
+---
 # Custom Material UI calendar and password field with strict validations
 
 https://prog-ops.github.io/namepasswdncalendarinput/
@@ -1270,7 +1281,7 @@ A fine custom Material UI calendar and password field with strict validations
 
 https://github.com/prog-ops/NoteApp
 
-## Features
+### Features
 
 - CRUD
 - Save to local storage
@@ -1278,7 +1289,7 @@ https://github.com/prog-ops/NoteApp
 - Animation
 - Testing
 
-## Libraries
+### Libraries
 
 - AsyncStorage
 - React Native Paper UI
