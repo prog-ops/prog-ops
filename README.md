@@ -4,15 +4,15 @@
 
 https://next16-auth-prisma7-dashboard.vercel.app/
 
-## 📋 Executive Summary
+### 📋 Executive Summary
 
 **Next-Auth-Prisma-Dashboard** is a rapid-development foundation for building secure, scalable, and aesthetically modern B2B SaaS dashboards. It integrates the latest bleeding-edge technologies (Next.js 16, React 19, Tailwind v4) into a cohesive starter kit. This project solves the common "boilerplate fatigue" by providing a pre-configured architecture with Authentication (OAuth specifically), Database management, and UI Component patterns out-of-the-box.
 
 The primary business value is **Time-to-Market**: developers can skip days of configuration (setting up Docker, Prisma, Auth adapters) and immediately focus on building domain-specific features like the demonstrated Product Analytics Dashboard.
 
-## 🏢 Business Analysis & Problem Statement
+### 🏢 Business Analysis & Problem Statement
 
-### The Problem
+**The Problem**
 
 Modern web development often effectively requires stitching together disparate tools. Configuring Next.js App Router with Server Components, ensuring type safety with Prisma, and handling secure Authentication via OAuth allows for robust apps but introduces significant initial overhead.
 
@@ -20,7 +20,7 @@ Modern web development often effectively requires stitching together disparate t
 - **Security:** Properly handling JWTs, Sessions, and Protected Routes without hydration mismatches.
 - **Scalability:** Moving from local development to production-ready database schemas.
 
-### The Solution: Next-Auth-Prisma-Dashboard
+**The Solution: Next-Auth-Prisma-Dashboard**
 
 This project serves as a "Senior-Grade" architectural reference.
 
@@ -29,9 +29,9 @@ This project serves as a "Senior-Grade" architectural reference.
 3.  **Modern UI/UX**: Leverages Tailwind CSS v4 for zero-runtime overhead styling, ensuring high performance and Core Web Vitals scores.
 4.  **Data-Driven**: Includes a functional Dashboard with Chart.js integration, demonstrating real-world data visualization patterns from external APIs (`dummyjson.com`).
 
-## 🏗 System Architecture & Design
+### 🏗 System Architecture & Design
 
-### High-Level Architecture (C4 Context)
+**High-Level Architecture (C4 Context)**
 
 ```mermaid
 graph TD
@@ -61,7 +61,7 @@ graph TD
     Auth -->|Persist Session| DB
 ```
 
-### Entity Relationship Diagram (ERD)
+**Entity Relationship Diagram (ERD)**
 
 The database schema is designed to support secure authentication via the Adapter pattern.
 
@@ -103,7 +103,7 @@ erDiagram
     }
 ```
 
-## 🛠 Technology Stack
+### 🛠 Technology Stack
 
 | Category               | Technology       | Version            | Rationale                                                                               |
 | ---------------------- | ---------------- | ------------------ | --------------------------------------------------------------------------------------- |
@@ -117,7 +117,7 @@ erDiagram
 | **Runtime**            | **Bun**          | 1.x                | Extremely fast JavaScript runtime and package manager (replaces Node/NPM).              |
 | **Environment**        | **Docker**       | Compose v3.8       | Containerizes the database for "one-command" setup.                                     |
 
-## ✨ Key Features
+### ✨ Key Features
 
 1.  **🔐 Secure Authentication**:
     - GitHub OAuth integration.
@@ -137,17 +137,17 @@ erDiagram
     - Client-side hydration for interactivity.
     - Optimized assets handling.
 
-## 🚀 Getting Started
+### 🚀 Getting Started
 
 Follow these instructions to get the project up and running on your local machine.
 
-### Prerequisites
+**Prerequisites**
 
 - **Bun** (or Node.js v20+)
 - **Docker** & Docker Compose
 - **GitHub Account** (for OAuth credentials)
 
-### Configs
+**Configs**
 
 1.  **Environment Setup**
     Create a `.env` file in the root directory:
@@ -184,18 +184,18 @@ Follow these instructions to get the project up and running on your local machin
 
 Open [http://localhost:3000](http://localhost:3000) in the browser.
 
-## ☁️ Deployment (Cloud Production)
+### ☁️ Deployment (Cloud Production)
 
 This project is architected to be deployed serverless-ly on **Vercel** with a managed PostgreSQL database (**Neon**).
 
-### Deployment Strategy
+**Deployment Strategy**
 
 | Component          | Service Provider             | Reason                                                               |
 | ------------------ | ---------------------------- | -------------------------------------------------------------------- |
 | **Frontend & API** | [Vercel](https://vercel.com) | Zero-config specific optimizations for Next.js 16.                   |
 | **Database**       | [Neon](https://neon.tech)    | Serverless Postgres that scales to zero; perfect for variable loads. |
 
-### Steps to Deploy
+**Steps to Deploy**
 
 1.  **Database**: Create a project on Neon.tech and get the connection string (`postgres://...`).
 2.  **Environment Variables**: In Vercel, set these Production variables:
