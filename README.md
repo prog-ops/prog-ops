@@ -1,6 +1,6 @@
 # Welcome to my Portfolio page
 
-# Serverless Next-Auth-Prisma-Dashboard (Modern Dashboard Starter)
+# ✔️ Serverless Next-Auth-Prisma-Dashboard (Modern Dashboard Starter)
 
 https://next16-auth-prisma7-dashboard.vercel.app/
 
@@ -212,8 +212,7 @@ This project is architected to be deployed serverless-ly on **Vercel** with a ma
 
 
 
----
-# NativeBoard - Vanilla Analytics Dashboard
+# ✔️ NativeBoard - Vanilla Analytics Dashboard
 
 https://native-dashboard-nu.vercel.app/
 
@@ -235,8 +234,7 @@ https://native-dashboard-nu.vercel.app/
 
 
 
----
-# Note History
+# ✔️ Note History
 
 https://drive.google.com/file/d/1IDfBjIxcZG0aowIKjYQfByM8m42IXrce/view?usp=drive_link
 
@@ -610,8 +608,7 @@ The `notes/` folder will be created alongside the executable on first run.
 
 
 
----
-# 🛍️ Shopping Gallery UI (Modern E-Commerce)
+# ✔️ Shopping Gallery UI (Modern E-Commerce)
 
 https://shopping-gallery-t2yo.vercel.app/
 
@@ -655,8 +652,7 @@ This is engineered for performance and scalability.
 
 
 
----
-# 📧 Mailbox App
+# ✔️ Mailbox App
 
 https://mailbox-flame.vercel.app/
 
@@ -701,8 +697,7 @@ A modern, fast, and elegant personal communication dashboard built with **React 
 
 
 
----
-# Multiple Choice Question (MCQ) Quiz App
+# ✔️ Multiple Choice Question (MCQ) Quiz App
 
 https://prog-ops.github.io/multiplecq/
 
@@ -732,8 +727,7 @@ A modern, interactive quiz application built with React and TypeScript that uses
 
 
 
----
-# Product Management App (MySQL-Express-React-NodeJS)
+# ✔️ Product Management App (MySQL-Express-React-NodeJS)
 
 A robust, full-stack Product Management application built with the **MERN Stack** (MySQL, Express, React, Node.js).
 This application features a modern, responsive user interface designed with **Tailwind CSS** using a "Tritone" dark theme, and a powerful backend with server-side pagination and search capabilities.
@@ -768,8 +762,7 @@ https://github.com/user-attachments/assets/3c9738ba-f120-43ad-bbd0-2ed8933f715a
 
 
 
----
-# Seller Products Monorepo (MySQL-Express-React-NodeJS)
+# ✔️ Seller Products Monorepo (MySQL-Express-React-NodeJS)
 
 see more:
 https://github.com/prog-ops/seller_products
@@ -777,8 +770,7 @@ https://github.com/prog-ops/seller_products
 
 
 
----
-# Github Users App
+# ✔️ Github Users App
 
 see more:
 https://github.com/prog-ops/mygithub_user_repos
@@ -786,8 +778,7 @@ https://github.com/prog-ops/mygithub_user_repos
 
 
 
----
-# Full-stack & Mediator Backend for ReactJS (MySQL-Express-React-NodeJS)
+# ✔️ Full-stack & Mediator Backend for ReactJS (MySQL-Express-React-NodeJS)
 
 https://github.com/user-attachments/assets/c2e2965a-f39a-4cb7-9042-3a8fcf05cd82
 
@@ -821,8 +812,7 @@ https://github.com/user-attachments/assets/c2e2965a-f39a-4cb7-9042-3a8fcf05cd82
 
 
 
----
-# Drag & Drop Note
+# ✔️ Drag & Drop Note
 
 Link:
 https://dragdropnote.vercel.app/
@@ -833,8 +823,7 @@ https://github.com/prog-ops/dragdropnote
 
 
 
----
-# Get The Bubble - Multiplayer Game
+# ✔️ Get The Bubble - Multiplayer Game
 
 https://github.com/prog-ops/GetTheBubbleMultiplayer
 
@@ -876,8 +865,7 @@ Get The Bubble is a fast-paced multiplayer game built with modern web technologi
 
 
 
----
-# Content Membership Platform
+# ✔️ Content Membership Platform
 
 https://github.com/prog-ops/membership-api
 
@@ -918,8 +906,7 @@ This application manages user access to articles and videos based on three diffe
 
 
 
----
-# Next.js + Firebase Auth
+# ✔️ Next.js + Firebase Auth
 
 A modern web application built with **Next.js 14**, **TypeScript**, and **Firebase**, featuring secure user authentication and a responsive user interface powered by **Tailwind CSS**.
 
@@ -941,8 +928,7 @@ A modern web application built with **Next.js 14**, **TypeScript**, and **Fireba
 
 
 
----
-# 🚀 Ionic React TaskFlow
+# ✔️ Ionic React TaskFlow
 
 > **A Momentum-Driven Hybrid Mobile Task Management App — Built with Senior-Level Engineering Patterns**
 
@@ -1199,8 +1185,7 @@ Potential future enhancements discussed in the architecture phase:
 
 
 
----
-# Rust Native Calculator
+# ✔️ Rust Native Calculator
 
 https://github.com/prog-ops/rust-native-calculator/blob/utama/target/debug/app.exe
 
