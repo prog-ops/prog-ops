@@ -1460,6 +1460,8 @@ If this project were to be scaled, the next step would be applying Domain-Driven
 
 # ✔️ 3D Element Collision Simulation (Wind -> Water -> Fire -> Metal -> Earth -> Wind)
 
+https://github.com/user-attachments/assets/abcd411e-fe26-4f99-9f2c-53b7d6799bf0
+
 A highly interactive, physics-based 3D simulation running in the browser, built from scratch using Vanilla JavaScript and **Three.js**. It visually simulates an "elemental battle" where different natural elements collide, bounce, and conquer each other until only one reigns supreme.
 
 ## 🚀 Features
