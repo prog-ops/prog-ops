@@ -1078,11 +1078,13 @@ https://github.com/user-attachments/assets/c2e2965a-f39a-4cb7-9042-3a8fcf05cd82
 
 # ✔️ Drag & Drop Note
 
-Link:
 https://dragdropnote.vercel.app/
 
-See more:
-https://github.com/prog-ops/dragdropnote
+- Vite
+- React
+- Zustand
+- pnpm
+- Permanent local storage
 
 
 
