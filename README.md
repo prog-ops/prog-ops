@@ -1005,6 +1005,8 @@ This project directly addresses each challenge above:
 
 # ✔️ Github User Finder App
 
+https://mygithub-user-repos.vercel.app
+
 Allows you to search Github users and repos. A frontend project with improved UI effects, animations, logical conditions, styles, keyboard handling, error and loading handling, and responsive UI, that is optimized for mobile view.
 
 ### Tech Stack
