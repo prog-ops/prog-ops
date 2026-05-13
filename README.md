@@ -1418,6 +1418,9 @@ Potential future enhancements discussed in the architecture phase:
 
 # ✔️ Rust Native Calculator
 
+<img width="331" height="547" alt="nativecalc" src="https://github.com/user-attachments/assets/36709d98-eb50-4b7e-9907-8a240c9e50db" />
+
+
 https://github.com/prog-ops/rust-native-calculator/blob/utama/target/debug/app.exe
 
 A modern, highly responsive, and themeable desktop calculator built with **Rust**, **eframe (egui)**, and **Win32 Native APIs**. 
