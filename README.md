@@ -10,99 +10,6 @@ https://next16-auth-prisma7-dashboard.vercel.app/
 
 The primary business value is **Time-to-Market**: developers can skip days of configuration (setting up Docker, Prisma, Auth adapters) and immediately focus on building domain-specific features like the demonstrated Product Analytics Dashboard.
 
-### 🏢 Business Analysis & Problem Statement
-
-**The Problem**
-
-Modern web development often effectively requires stitching together disparate tools. Configuring Next.js App Router with Server Components, ensuring type safety with Prisma, and handling secure Authentication via OAuth allows for robust apps but introduces significant initial overhead.
-
-- **Complexity:** Keeping `next.config.js`, `postcss`, and `prisma.schema` in sync.
-- **Security:** Properly handling JWTs, Sessions, and Protected Routes without hydration mismatches.
-- **Scalability:** Moving from local development to production-ready database schemas.
-
-**The Solution: Next-Auth-Prisma-Dashboard**
-
-This project serves as a "Senior-Grade" architectural reference.
-
-1.  **Secure by Design**: Uses NextAuth.js with a secure Postgres adapter. No sensitive tokens are exposed to the client. Session validation occurs on the Edge/Server.
-2.  **Type-Safety First**: End-to-end TypeScript integration from the Database schema (Prisma) to the Frontend Components (React).
-3.  **Modern UI/UX**: Leverages Tailwind CSS v4 for zero-runtime overhead styling, ensuring high performance and Core Web Vitals scores.
-4.  **Data-Driven**: Includes a functional Dashboard with Chart.js integration, demonstrating real-world data visualization patterns from external APIs (`dummyjson.com`).
-
-### 🏗 System Architecture & Design
-
-**High-Level Architecture (C4 Context)**
-
-```mermaid
-graph TD
-    User((User))
-    GitHub((GitHub OAuth))
-    Browser[Web Browser / Client]
-
-    subgraph "PrismaTailwindCRUD System"
-        NextServer["Next.js Server (App Router)"]
-        API[API Routes / Server Actions]
-        Auth[NextAuth Handler]
-        DB[(PostgreSQL Database)]
-    end
-
-    DummyJSON[External Product API]
-
-    User -->|Interacts| Browser
-    Browser -->|HTTPS| NextServer
-
-    NextServer -->|Server-Side Render| Browser
-    Browser -->|Client Interactions| API
-
-    Auth -->|Authorize| GitHub
-    API -->|Query/Mutate| DB
-    API -->|Fetch Data| DummyJSON
-
-    Auth -->|Persist Session| DB
-```
-
-**Entity Relationship Diagram (ERD)**
-
-The database schema is designed to support secure authentication via the Adapter pattern.
-
-```mermaid
-erDiagram
-    User ||--|{ Account : has
-    User ||--|{ Session : has
-
-    User {
-        String id PK
-        String name
-        String email
-        DateTime emailVerified
-        String image
-    }
-
-    Account {
-        String id PK
-        String userId FK
-        String type
-        String provider
-        String providerAccountId
-        String refresh_token
-        String access_token
-        Int expires_at
-    }
-
-    Session {
-        String id PK
-        String sessionToken
-        String userId FK
-        DateTime expires
-    }
-
-    VerificationToken {
-        String identifier
-        String token
-        DateTime expires
-    }
-```
-
 ### 🛠 Technology Stack
 
 | Category               | Technology       | Version            | Rationale                                                                               |
@@ -117,97 +24,9 @@ erDiagram
 | **Runtime**            | **Bun**          | 1.x                | Extremely fast JavaScript runtime and package manager (replaces Node/NPM).              |
 | **Environment**        | **Docker**       | Compose v3.8       | Containerizes the database for "one-command" setup.                                     |
 
-### ✨ Key Features
+Read more:
 
-1.  **🔐 Secure Authentication**:
-    - GitHub OAuth integration.
-    - Persisted sessions in PostgreSQL.
-    - Protected routes (Sidebar & Dashboard inaccessible unless logged in).
-2.  **📊 Interactive Dashboard**:
-    - Real-time data fetching from `dummyjson.com`.
-    - **Data Visualization**: Dynamic Bar Charts visualizing product categories.
-    - **Data Grid**: Tabular view of products with filtering and search capabilities.
-    - **Analytics**: Automatic calculation of metrics (e.g., Average Ratings).
-3.  **🎨 Responsive UI**:
-    - Sidebar navigation with active state awareness (`usePathname`).
-    - Mobile-responsive layout.
-    - Dark mode compatible (via Tailwind).
-4.  **⚡ High Performance**:
-    - Server-side rendering for initial load.
-    - Client-side hydration for interactivity.
-    - Optimized assets handling.
-
-### 🚀 Getting Started
-
-Follow these instructions to get the project up and running on your local machine.
-
-**Prerequisites**
-
-- **Bun** (or Node.js v20+)
-- **Docker** & Docker Compose
-- **GitHub Account** (for OAuth credentials)
-
-**Configs**
-
-1.  **Environment Setup**
-    Create a `.env` file in the root directory:
-
-    ```ini
-    # Database (Docker default)
-    DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public"
-
-    # NextAuth
-    NEXTAUTH_URL="http://localhost:3000"
-    NEXTAUTH_SECRET="your-generated-secret-key"
-
-    # GitHub OAuth (Get these from GitHub Developer Settings)
-    GITHUB_CLIENT_ID="your-client-id"
-    GITHUB_CLIENT_SECRET="your-client-secret"
-    ```
-
-2.  **Start the Database (locally)**
-
-    ```bash
-    docker-compose up -d
-    ```
-
-5.  **Sync Database Schema**
-
-    ```bash
-    bun prisma db push
-    ```
-
-6.  **Run Development Server**
-    ```bash
-    bun dev
-    ```
-
-Open [http://localhost:3000](http://localhost:3000) in the browser.
-
-### ☁️ Deployment (Cloud Production)
-
-This project is architected to be deployed serverless-ly on **Vercel** with a managed PostgreSQL database (**Neon**).
-
-**Deployment Strategy**
-
-| Component          | Service Provider             | Reason                                                               |
-| ------------------ | ---------------------------- | -------------------------------------------------------------------- |
-| **Frontend & API** | [Vercel](https://vercel.com) | Zero-config specific optimizations for Next.js 16.                   |
-| **Database**       | [Neon](https://neon.tech)    | Serverless Postgres that scales to zero; perfect for variable loads. |
-
-**Steps to Deploy**
-
-1.  **Database**: Create a project on Neon.tech and get the connection string (`postgres://...`).
-2.  **Environment Variables**: In Vercel, set these Production variables:
-    - `DATABASE_URL`: Your Neon connection string.
-    - `GITHUB_CLIENT_ID` & `GITHUB_CLIENT_SECRET`: New OAuth credentials with the Production Homepage URL.
-    - `NEXTAUTH_URL`: Your Vercel domain (e.g., `https://project.vercel.app`).
-    - `NEXTAUTH_SECRET`: A strong, randomly generated string.
-3.  **Build Command**: The `package.json` build script is optimized for Vercel:
-    ```json
-    "build": "bun prisma generate && next build"
-    ```
-4.  **Schema Sync**: Run `prisma db push` locally pointing to the prod DB, or run it via Vercel Console one-time to initialize tables.
+https://github.com/prog-ops/prog-ops/edit/main/Serverless-Next-Auth-Prisma-Dashboard-README.md
 
 
 
@@ -242,87 +61,11 @@ https://drive.google.com/file/d/1IDfBjIxcZG0aowIKjYQfByM8m42IXrce/view?usp=drive
 
 > Lightweight, portable desktop notes application with local-first storage, edit history tracking, and native Windows transparency effects — built on Tauri v2.
 
-![Version](https://img.shields.io/badge/version-0.1.0-8B5CF6?style=flat-square)
-![Tauri](https://img.shields.io/badge/Tauri-v2-24C8D8?style=flat-square&logo=tauri&logoColor=white)
-![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=white)
-![Rust](https://img.shields.io/badge/Rust-2021-DEA584?style=flat-square&logo=rust&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=flat-square&logo=typescript&logoColor=white)
-![Platform](https://img.shields.io/badge/platform-Windows-0078D6?style=flat-square&logo=windows&logoColor=white)
-
-### Table of Contents
-
-- [Overview](#overview)
-- [Key Features](#key-features)
-- [Architecture](#architecture)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Data Flow](#data-flow)
-- [Challenges & Solutions](#challenges--solutions)
-- [Getting Started](#getting-started)
-- [Keyboard Shortcuts](#keyboard-shortcuts)
-- [Configuration](#configuration)
-- [Future Roadmap](#future-roadmap)
-
 ### Overview
 
 Note History is a portable, self-contained desktop application designed to store notes as individual JSON files alongside the executable. This enables a **zero-database, zero-cloud** architecture where the entire app — including its data — can be moved between machines by simply copying the folder.
 
 The application is built with a **Rust backend** (Tauri v2) handling file I/O and Windows DWM integration, and a **React 19 frontend** providing a modern glassmorphism UI with real-time inline editing.
-
-**Design Philosophy**
-
-| Principle | Implementation |
-|---|---|
-| **Portable-first** | Notes stored relative to the executable — no `%APPDATA%`, no registry, no external DB |
-| **Transparent data** | Each note is a human-readable JSON file with full edit history |
-| **Native integration** | DWM Mica Alt / solid color themes via Win32 API, custom frameless titlebar |
-| **Minimal footprint** | ~80 KB of source code (excluding dependencies), single binary output |
-
-### Key Features
-
-- **CRUD Operations** — Create, read, update, and delete notes with full error handling and toast feedback
-- **Edit History Tracking** — Every edit automatically snapshots the previous content with a timestamp, displayed in a collapsible accordion per note
-- **Custom Frameless Titlebar** — Replaces native Windows chrome with a drag-enabled custom titlebar supporting minimize, maximize/restore, and close
-- **Window Theming Engine** — Toggle between DWM Mica Alt blur (transparent) and solid color modes with 6 curated dark presets, persisted via `localStorage`
-- **Real-time Search** — Client-side filtering across all note content
-- **Inline Editing** — Edit notes in-place with auto-resizing textareas, keyboard shortcuts (`Ctrl+Enter` to save, `Escape` to cancel)
-- **Unsaved State Indicator** — Pulsing dot in titlebar when the new-note input has unsaved content
-- **Open in Explorer** — One-click to open the notes directory in Windows Explorer
-- **Indonesian Locale** — Date formatting with `id-ID` locale, Indonesian UI strings
-
-### Architecture
-
-**High-Level Component Tree**
-
-```
-App (Orchestrator — state management, CRUD handlers, keyboard shortcuts)
-├── Titlebar              Custom window controls, drag region, unsaved indicator
-├── Toolbar               Search input, theme toggle, folder shortcut
-├── NoteItem[]            Note cards with inline edit + action buttons
-│   └── EditHistory       Collapsible accordion showing edit snapshots
-├── ThemePicker           Modal overlay — blur/solid mode selector + color grid
-├── ToastContainer        Stacked notification popups (auto-dismiss)
-└── ConfirmDialog         Reusable modal for destructive action confirmation
-```
-
-**Backend (Rust) Command Surface**
-
-| Tauri Command | Signature | Description |
-|---|---|---|
-| `get_notes_dir` | `() → Result<String>` | Returns absolute path to the `notes/` directory |
-| `list_notes` | `() → Result<Vec<Note>>` | Reads all `.json` files, sorted by `updated_at` DESC |
-| `save_note` | `(id, content) → Result<Note>` | Creates (if `id` is empty) or updates a note with automatic history tracking |
-| `delete_note` | `(id) → Result<()>` | Removes the corresponding `.json` file |
-| `open_notes_folder` | `() → Result<()>` | Spawns `explorer.exe` pointing to the notes directory |
-| `apply_window_theme` | `(window, config) → Result<()>` | Applies DWM backdrop attributes and manages frame margins |
-
-**Frontend Hook Layer**
-
-| Hook | Responsibility |
-|---|---|
-| `useNotes` | CRUD state + Tauri IPC bridge for all note operations |
-| `useTheme` | Theme state, localStorage persistence, CSS variable mutation, and Tauri IPC for DWM |
-| `useToast` | Ephemeral notification queue with auto-cleanup via `setTimeout` |
 
 ### Tech Stack
 
@@ -354,258 +97,9 @@ App (Orchestrator — state management, CRUD handlers, keyboard shortcuts)
 | Bun | Package manager and script runner (configured in `tauri.conf.json`) |
 | Cargo | Rust dependency management and compilation |
 
-### Project Structure
+Read more:
 
-```
-tauri-app-1/
-├── index.html                    # Vite entry point (lang="id")
-├── package.json                  # Frontend deps and scripts
-├── vite.config.ts                # Vite config — fixed port 3420, HMR, src-tauri ignored
-├── tsconfig.json                 # Strict TS config — ES2020, bundler resolution
-│
-├── src/                          # ── Frontend (React + TypeScript) ──
-│   ├── main.tsx                  # React root render (StrictMode)
-│   ├── App.tsx                   # Orchestrator: state, handlers, keyboard shortcuts
-│   ├── App.css                   # Full design system — tokens, components, animations
-│   │
-│   ├── components/
-│   │   ├── Titlebar.tsx          # Custom frameless titlebar with window controls
-│   │   ├── NoteItem.tsx          # Note card — display, inline edit, save/cancel
-│   │   ├── EditHistory.tsx       # Accordion for edit history snapshots
-│   │   ├── ThemePicker.tsx       # Modal — blur/solid theme selection
-│   │   ├── ConfirmDialog.tsx     # Reusable confirmation modal
-│   │   └── ToastContainer.tsx    # Notification container
-│   │
-│   ├── hooks/
-│   │   ├── useNotes.ts           # CRUD operations via Tauri invoke
-│   │   ├── useTheme.ts           # Theme management + DWM IPC
-│   │   └── useToast.ts           # Toast notification queue
-│   │
-│   ├── types/
-│   │   └── note.ts               # Shared interfaces: Note, EditRecord, ThemeConfig, Toast
-│   │
-│   └── utils/
-│       └── date.ts               # Indonesian date formatting (id-ID locale)
-│
-└── src-tauri/                    # ── Backend (Rust) ──
-    ├── Cargo.toml                # Rust dependencies + Windows-only DWM features
-    ├── tauri.conf.json           # App config — decorations:false, transparent:true
-    ├── build.rs                  # Tauri build script
-    │
-    ├── capabilities/
-    │   └── default.json          # Security permissions (window controls, dragging)
-    │
-    └── src/
-        ├── main.rs               # Rust entry point (#![windows_subsystem = "windows"])
-        └── lib.rs                # All Tauri commands, structs, and DWM integration
-```
-
-### Data Flow
-
-**Note Persistence Model**
-
-```
-notes/<uuid>.json
-{
-  "id": "550e8400-e29b-41d4-a716-446655440000",
-  "content": "Current note content",
-  "created_at": "2026-05-06T12:00:00+07:00",
-  "updated_at": "2026-05-06T12:30:00+07:00",
-  "edit_history": [
-    {
-      "edited_at": "2026-05-06T12:30:00+07:00",
-      "content_snapshot": "Previous content before this edit"
-    }
-  ]
-}
-```
-
-**Edit History Logic**
-
-```
-save_note(id, newContent)
-│
-├─ id is empty → Create new note (no history)
-│
-└─ id exists
-   ├─ File found
-   │  ├─ Content changed → Push old content to edit_history[], update content
-   │  └─ Content unchanged → Update updated_at only (no history entry)
-   │
-   └─ File not found → Create new note with provided ID
-```
-
-**Theme Application Pipeline**
-
-```
-User selects theme
-    → useTheme.setMode() / setSolidColor()
-        → Update React state
-        → Persist to localStorage
-        → Mutate CSS custom properties (--bg-transparent, --bg-sidebar)
-        → invoke("apply_window_theme", config)
-            → Rust: DwmSetWindowAttribute(DWMWA_SYSTEMBACKDROP_TYPE)
-            → Rust: DwmExtendFrameIntoClientArea (margins: -1 for blur, 0 for solid)
-            → Rust: Remove WS_CAPTION, force SWP_FRAMECHANGED redraw
-```
-
-### Challenges & Solutions
-
-**1. Frameless Window with Native Transparency**
-
-**Challenge:**
-Achieving a truly borderless window with DWM Mica Alt backdrop on Tauri v2 requires bypassing the standard window decoration system while maintaining proper window dragging, resizing, and control button behavior. The Tauri webview and Win32 compositor have different expectations about frame ownership.
-
-**Solution:**
-- Configured `decorations: false` and `transparent: true` in `tauri.conf.json` to remove native chrome
-- Implemented direct Win32 API calls via the `windows` crate (v0.58) to set `DWMWA_SYSTEMBACKDROP_TYPE = 4` (Mica Alt) and extend frame margins to `-1` across all edges
-- Stripped `WS_CAPTION` via `SetWindowLongW` and forced a frame recalculation with `SWP_FRAMECHANGED` to eliminate residual title bar artifacts
-- Built a fully custom `<Titlebar>` component using Tauri's `data-tauri-drag-region` attribute for drag support, with explicit Tauri API calls for minimize/maximize/close
-- Required specific Tauri capabilities (`core:window:allow-start-dragging`, `core:window:allow-set-decorations`) to be declared in `default.json`
-
-**2. Portable, Self-Contained Storage Without a Database**
-
-**Challenge:**
-Traditional desktop apps rely on `%APPDATA%` or embedded SQLite, which ties data to a specific user profile or machine. The goal was fully portable storage where copying the application folder preserves all data.
-
-**Solution:**
-- Used `std::env::current_exe()` to resolve the executable's directory at runtime, then join a `notes/` subdirectory — making storage location entirely relative to where the binary lives
-- Each note is stored as an independent `<uuid>.json` file, enabling:
-  - Human-readable inspection and manual backup
-  - Resilience against corruption (one bad file doesn't affect others)
-  - Simple diff-based version tracking in Git
-- Automatic directory creation via `fs::create_dir_all` on first access
-
-**Trade-off:** No indexing or relational queries — search is performed client-side in O(n) over all note content. Acceptable for the expected data volume (hundreds to low thousands of notes).
-
-**3. Edit History Without Bloating File Size**
-
-**Challenge:**
-Tracking every edit as a full content snapshot can cause JSON files to grow unboundedly, especially for frequently edited notes with long content.
-
-**Solution:**
-- History entries only store the **previous** content snapshot (not the new one), avoiding duplication since the current state is always in the `content` field
-- Content trimming comparison (`old.content.trim() !== new.content.trim()`) prevents history pollution from whitespace-only changes
-- History is appended only when a meaningful change occurs — re-saving identical content updates the timestamp but does not create a history entry
-- Frontend renders history in a collapsed accordion by default, loaded lazily only when the user clicks to expand
-
-**Future consideration:** Implement a configurable history depth limit or delta-based compression for power users.
-
-**4. Bidirectional Theme Synchronization (CSS ↔ DWM)**
-
-**Challenge:**
-The window backdrop is managed by the OS compositor (DWM), while the UI's visual layer is CSS in a webview. Switching between blur-transparent and solid-color modes requires synchronized updates to both layers — and they have completely different APIs.
-
-**Solution:**
-- The `useTheme` hook acts as a single source of truth, coordinating:
-  1. **React state** update (immediate UI feedback)
-  2. **localStorage persistence** (survives app restart)
-  3. **CSS custom property mutation** (`--bg-transparent`, `--bg-sidebar`) via `document.documentElement.style.setProperty` for immediate webview styling
-  4. **Tauri IPC** to the Rust backend, which applies DWM attributes and frame margins
-- Mode switching (blur → solid) resets the backdrop type to `1` (None) and frame margins to `0`, while also overriding CSS variables to use opaque colors instead of alpha-blended values
-
-**5. Concurrent State Consistency in React**
-
-**Challenge:**
-Multiple async operations (create, update, delete) can interleave, causing stale data to render if not carefully managed. The `useNotes` hook performs Tauri IPC calls that return asynchronously, and the user might trigger additional actions before the first completes.
-
-**Solution:**
-- Every mutating operation follows a strict **write-then-reload** pattern: `await saveNote()` → `await loadNotes()`. This ensures the note list always reflects the ground truth from the filesystem
-- All handlers are wrapped in `useCallback` with explicit dependency arrays to prevent stale closures
-- The `NoteItem` component syncs its local `editValue` with the parent's note data via a `useEffect` that only runs when not actively editing, preventing jarring resets mid-edit
-- Loading state is managed with `try/finally` to guarantee the loading indicator is dismissed even on error
-
-**6. Tauri v2 Security Capabilities Model**
-
-**Challenge:**
-Tauri v2 introduced a strict capability-based permission system where each window operation must be explicitly allowed. The default scaffold does not include permissions for custom titlebar actions (minimize, maximize, close, drag), causing silent failures.
-
-**Solution:**
-- Declared granular permissions in `src-tauri/capabilities/default.json`:
-  ```json
-  [
-    "core:window:allow-minimize",
-    "core:window:allow-toggle-maximize",
-    "core:window:allow-close",
-    "core:window:allow-start-dragging",
-    "core:window:allow-set-decorations"
-  ]
-  ```
-- Scoped all permissions to the `"main"` window only, following the principle of least privilege
-- CSP is set to `null` in `tauri.conf.json` for development flexibility (should be tightened for production)
-
-### Getting Started
-
-**Prerequisites**
-
-- **Rust** (stable, 2021 edition) — [Install via rustup](https://rustup.rs/)
-- **Bun** (or Node.js) — [Install Bun](https://bun.sh/)
-- **Windows 11** — Required for Mica Alt backdrop effects (Windows 10 will fall back gracefully)
-
-**Installation**
-
-```bash
-# Clone the repository
-git clone <repository-url>
-cd tauri-app-1
-
-# Install frontend dependencies
-bun install
-
-# Run in development mode (starts Vite + Tauri concurrently)
-bun run tauri dev
-```
-
-**Build for Production**
-
-```bash
-# Creates an optimized release binary
-bun run tauri build
-```
-
-The compiled binary and installer will be available in `src-tauri/target/release/`.
-The `notes/` folder will be created alongside the executable on first run.
-
-### Keyboard Shortcuts
-
-| Shortcut | Context | Action |
-|---|---|---|
-| `Ctrl+N` | Global | Focus new note input |
-| `Ctrl+S` | Global (input has content) | Save new note |
-| `Ctrl+Enter` | New note textarea | Save new note |
-| `Ctrl+Enter` | Edit mode textarea | Save edited note |
-| `Ctrl+Shift+E` | Global | Open notes folder in Explorer |
-| `Escape` | Edit mode | Cancel editing |
-| `Escape` | Dialog / Theme Picker | Close overlay |
-
-### Configuration
-
-**Tauri Window Configuration (`tauri.conf.json`)**
-
-| Property | Value | Notes |
-|---|---|---|
-| `decorations` | `false` | Disables native title bar for custom implementation |
-| `transparent` | `true` | Enables DWM backdrop composition |
-| `shadow` | `true` | Retains window shadow for depth perception |
-| `minWidth` / `minHeight` | `700×500` | Prevents layout breakage at extreme sizes |
-| `width` / `height` | `960×680` | Default window dimensions |
-
-**Vite Dev Server (`vite.config.ts`)**
-
-| Property | Value | Notes |
-|---|---|---|
-| `port` | `3420` | Fixed port (strict — fails if unavailable) |
-| `host` | `127.0.0.1` | Localhost only (overridable via `TAURI_DEV_HOST`) |
-| `ignored` | `**/src-tauri/**` | Prevents file watcher from triggering on Rust rebuilds |
-
-### Future Roadmap
-
-- [ ] **History depth limit** — Configurable maximum number of edit history entries per note
-- [ ] **Markdown rendering** — Toggle between raw text and rendered markdown preview
-- [ ] **Note categories / tags** — Lightweight organizational layer without adding database complexity
-- [ ] **Export functionality** — Export all notes as a single JSON bundle or plaintext archive
-- [ ] **Multi-platform support** — Linux and macOS compositor integration for backdrop effects
-- [ ] **CSP hardening** — Production-grade Content Security Policy for the webview
+https://github.com/prog-ops/prog-ops/blob/main/Note-History-README.md
 
 
 
@@ -618,31 +112,6 @@ A high-performance, responsive e-commerce homepage interface built with **React*
 
 This project demonstrates modern frontend architecture, focusing on **Core Web Vitals (CWV)**, seamless UX, and efficient state management without heavy dependencies.
 
-### 🚀 Key Highlights & Best Practices
-
-This is engineered for performance and scalability.
-
-**⚡ Performance & Optimization**
-
-- **Hybrid State Management**:
-    - **Server State**: Handled by **TanStack Query (React Query)** with caching logic (`staleTime`, `cacheTime`) to prevent redundant network requests and ensure instant navigation.
-    - **Client State**: Managed by **Zustand** for a lightweight, boilerplate-free global store (used for filtering logic).
-- **LCP (Largest Contentful Paint) Optimized**: The main carousel prioritizes the active slide image (`loading="eager"`) while lazy-loading off-screen images.
-- **CLS (Cumulative Layout Shift) Prevention**: All image containers utilize aspect-ratio placeholders and skeleton loaders to prevent layout jumps during data fetching.
-
-**🎨 Modern UX/UI Architecture**
-
-- **3D "Cover Flow" Carousel**: Custom-built CSS 3D Transform carousel (No heavy libraries like `slick` or `swiper`). Features touch swipe gestures, auto-play with hover-pause, and smooth hardware-accelerated transitions.
-- **Smart Image Fallbacks**: A robust `ImageWithFallback` component that gracefully handles broken URLs (404s) or loading errors by showing a polished placeholder.
-- **Instant Filtering**: Category selection performs client-side filtering on cached data, resulting in **zero-latency** UI updates.
-- **Indeterminate Loading States**: Custom animated progress bars instead of generic spinners for a perceived faster loading experience.
-
-**🛠 Code Quality**
-
-- **Separation of Concerns**: Logic is decoupled from UI. API calls are isolated in hooks/queries, and complex UI logic is separated into reusable components.
-- **DRY (Don't Repeat Yourself)**: Reusable components for `Loading`, `ImageWithFallback`, and consistent CSS variables.
-- **Mobile-First Design**: Fully responsive Grid and Flex layouts using CSS Grid (`repeat(auto-fit)` logic) and Media Queries.
-
 ### 📦 Tech Stack
 
 - **Core**: React 18, Vite
@@ -650,6 +119,10 @@ This is engineered for performance and scalability.
 - **Styling**: CSS Modules / Native CSS Variables (No heavy UI frameworks)
 - **Icons**: React Icons
 - **Language**: JavaScript (ES6+)
+
+Read more:
+
+https://github.com/prog-ops/prog-ops/blob/main/Shopping-Gallery-ECommerce-README.md
 
 
 
@@ -659,28 +132,6 @@ This is engineered for performance and scalability.
 https://mailbox-flame.vercel.app/
 
 A modern, fast, and elegant personal communication dashboard built with **React 19** and **Vite**. This application combines a seamless email-style inbox with a robust task management system, all wrapped in a premium, responsive interface inspired by modern design principles.
-
-### ✨ Key Features
-
-**📩 Smart Inbox**
-
-- **Real-time Feel**: Smooth transitions between inbox lists and conversation threads.
-- **Dynamic Conversations**: Simulation of incoming messages and deep threading for a "live" chat experience.
-- **Rich Media**: Integrated avatars and clear typography for better readability.
-- **Searchable**: Easily filter through your messages.
-
-**✅ Integrated Task Management**
-
-- **Task Organization**: Create, edit, and delete tasks with ease.
-- **Tagging System**: Categorize tasks using a beautiful, color-coded tag system (e.g., Important, Meetings, Client Related).
-- **Filtering**: Quickly toggle between "Personal Errands", "Urgent To Do", and "My Tasks".
-- **Visual Feedback**: Clear indicators for completed tasks and expanded task details.
-
-**🚀 Premium User Experience**
-
-- **Inter-view Navigation**: Seamlessly switch between Inbox and Tasks using a hover-triggered Floating Action Button (FAB).
-- **PWA Ready**: Installable on mobile and desktop devices with offline support.
-- **Responsive Layout**: Designed to feel native on all screen sizes, from mobile phones to high-res monitors.
 
 ### 🛠️ Technology Stack
 
@@ -695,6 +146,10 @@ A modern, fast, and elegant personal communication dashboard built with **React 
 | **Icons**            | [MUI Icons](https://mui.com/material-ui/material-icons/)            |
 | **Date Management**  | [date-fns](https://date-fns.org/) & [dayjs](https://day.js.org/)    |
 | **API Backend**      | [JSONPlaceholder](https://jsonplaceholder.typicode.com/)            |
+
+Read more:
+
+https://github.com/prog-ops/prog-ops/blob/main/Mailbox-App-README.md
 
 
 
@@ -788,6 +243,8 @@ https://drive.google.com/file/d/1X30grHADev7XEzhrm2gHOpdwTH2qNrKZ/view?usp=shari
 | **Runtime** | Bun (compatible with Node.js/npm) |
 
 Read more:
+
+https://github.com/prog-ops/prog-ops/blob/main/Seller-Product-Management-README.md
 
 
 
