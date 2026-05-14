@@ -233,3 +233,9 @@ This project directly addresses each challenge above:
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `VITE_API_URL` | `http://localhost:5000` | Backend API base URL |
+
+### Screenshots
+
+`.env.example`
+
+<img width="507" height="313" alt="env example" src="https://github.com/user-attachments/assets/0f451727-347f-49ac-ab4f-392b030d1c07" />
