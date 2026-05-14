@@ -1,6 +1,6 @@
 # ✔️ Ionic React TaskFlow
 
-> **A Momentum-Driven Hybrid Mobile Task Management App — Built with Senior-Level Engineering Patterns**
+> **A Momentum-Driven Hybrid Mobile Task Management App**
 
 ### 📋 Executive Summary
 
