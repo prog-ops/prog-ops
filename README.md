@@ -442,7 +442,7 @@ A modern web application built with **Next.js 14**, **TypeScript**, and **Fireba
 
 # ✔️ Ionic React TaskFlow
 
-> **A Momentum-Driven Hybrid Mobile Task Management App — Built with Senior-Level Engineering Patterns**
+> **A Momentum-Driven Hybrid Mobile Task Management App**
 
 ### 📋 Executive Summary
 
@@ -460,125 +460,6 @@ TaskFlow implements two core differentiators:
 
 2. **Task Decay** — A novel UX feature where tasks visually degrade over time when left untouched. This creates progressive psychological urgency without aggressive notifications, making stale work impossible to ignore.
 
-### ✨ Key Features
-
-**🔥 Task Decay (Unique Feature)**
-
-Tasks are not static. They **age** over time based on `lastTouchedAt` timestamp:
-
-| Decay Level | Idle Time | Visual Effect |
-|:------------|:----------|:--------------|
-| 🟢 **Fresh** | 0–24 hours | Normal appearance |
-| ⏳ **Stale** | 1–3 days | Opacity 85%, yellow left border, badge `"⏳ 2d idle"` |
-| ⚠️ **Decaying** | 3–5 days | Opacity 70%, desaturated, red border, badge `"⚠️ 4d idle"` |
-| 💀 **Decayed** | 5+ days | Opacity 55%, heavily desaturated, red border, badge `"💀 7d idle"` |
-
-Editing or moving a task **resets the decay timer**, rewarding interaction.
-
-**↩️ Undo/Redo (Command Pattern)**
-
-Every mutation (add, delete, edit, move) is encapsulated as a reversible **Command** object. This enables:
-
-- Full undo/redo history (up to 50 actions)
-- Accessible via toolbar buttons on every tab
-- Commands are **pure data** (not closures), making them serializable and debuggable
-
-**💾 Local Persistence**
-
-All data is automatically persisted to `localStorage` with seamless migration support for schema changes.
-
-**📱 Linear Flow Architecture**
-
-Tasks progress through three phases with a single interaction (checkbox tap):
-
-```
-New (Red) ──checkbox──▶ Ongoing (Yellow) ──checkbox──▶ Done (Green)
-```
-
-The Done tab intentionally has no forward action — completed tasks stay completed, and can only be edited or deleted.
-
-### 🏗 Architecture & Engineering Decisions
-
-**State Transition Diagram**
-
-```mermaid
-stateDiagram-v2
-    [*] --> New
-
-    New --> Ongoing: Checkbox ✓
-    New --> Discarded: Delete ✕
-
-    Ongoing --> Done: Checkbox ✓
-    Ongoing --> Discarded: Delete ✕
-
-    Done --> Discarded: Delete ✕
-
-    state "Any State" as any
-    any --> any: Undo / Redo (Command Pattern)
-
-    note left of New: Entry point.\nAll tasks start here.\nDecay timer begins.
-    note right of Done: Terminal state.\nNo forward action.\nEdit & delete only.
-```
-
-**Component Architecture (Atomic Design)**
-
-```
-src/
-├── context/
-│   └── TaskContext.tsx          # Global state + Command Pattern interpreter
-├── hooks/
-│   ├── useCommandHistory.ts     # Generic undo/redo stack (reusable)
-│   └── useTaskDecay.ts          # Decay level calculation utilities
-├── components/
-│   ├── TaskItem.tsx             # Task card with decay visuals
-│   ├── TaskItem.css             # Decay CSS + card styles
-│   └── UndoRedoButtons.tsx      # Reusable toolbar undo/redo controls
-├── pages/
-│   ├── Tab1.tsx                 # New Tasks (Red)
-│   ├── Tab2.tsx                 # Ongoing Tasks (Yellow)
-│   └── Tab3.tsx                 # Done Tasks (Green)
-└── App.tsx                      # Router + Tab layout
-```
-
-| Layer | Role | Examples |
-|:------|:-----|:--------|
-| **Atoms** | Standard Ionic UI primitives | `IonButton`, `IonCheckbox`, `IonBadge` |
-| **Molecules** | Encapsulated task UI with logic | `TaskItem`, `UndoRedoButtons` |
-| **Organisms** | Page-level controllers with filtered state | `Tab1`, `Tab2`, `Tab3` |
-| **Templates** | Routing and layout | `App.tsx` |
-
-**Data Flow: Context API + Command Pattern**
-
-```mermaid
-flowchart LR
-    UI["UI Action<br/>(add/edit/delete/move)"]
-    CMD["Create Command<br/>(pure data object)"]
-    APPLY["applyCommand()<br/>execute | undo"]
-    STATE["setTasks()<br/>(functional updater)"]
-    HISTORY["useCommandHistory<br/>(undo/redo stack)"]
-    LS["localStorage<br/>(auto-persist)"]
-    DECAY["useTaskDecay<br/>(visual calculation)"]
-
-    UI --> CMD --> APPLY --> STATE
-    CMD --> HISTORY
-    STATE --> LS
-    STATE --> DECAY
-    HISTORY -->|"undo()"| APPLY
-    HISTORY -->|"redo()"| APPLY
-```
-
-_Why Command Pattern over simple state updates?_
-
-- Every action is **reversible** — undo restores exact previous state, including timestamps
-- Commands are **data, not closures** — avoids stale closure bugs, makes debugging trivial
-- The pattern is a **recognized GoF design pattern** that demonstrates architectural thinking beyond CRUD
-
-_Why Context API over Redux/Zustand?_
-
-- Application scope is contained — a single domain (tasks) with 4 mutations
-- Context + `useCallback` + functional updaters provide identical guarantees with zero additional dependencies
-- Moving to a state library is straightforward if scope grows, since the Command Pattern abstraction is decoupled
-
 ### 🛠 Tech Stack
 
 | Category | Technology | Decision Rationale |
@@ -591,177 +472,30 @@ _Why Context API over Redux/Zustand?_
 | **Styling** | CSS3 Variables + Ionic Theming | CSS custom properties for responsive design and dark mode readiness |
 | **Persistence** | localStorage | Zero-config, instant, with migration layer for schema evolution |
 
-### 🐛 Bugs Identified & Resolved
+Read more:
 
-During a comprehensive audit, **8 bugs** were identified and systematically resolved:
-
-| # | Bug | Severity | Resolution |
-|:--|:----|:---------|:-----------|
-| 1 | **ID collision** — `Date.now()` produced duplicate IDs on rapid adds | 🔴 High | Replaced with `crypto.randomUUID()` |
-| 2 | **Stale closures** — All state mutations referenced stale `tasks` variable | 🔴 High | Migrated to functional updaters `setTasks(prev => ...)` |
-| 3 | **Dependency mismatch** — `history@5` incompatible with `react-router@5` | 🟡 Medium | Downgraded to `history@^4.10.1` |
-| 4 | **Confusing cycle-back** — Done tab checkbox recycled tasks to New | 🟡 Medium | Removed checkbox from Done tab, made props optional |
-| 5 | **Checkbox visual flash** — `IonCheckbox checked={false}` in Shadow DOM | 🟡 Medium | Checkbox conditionally rendered only where move is possible |
-| 6 | **Unused import** — `useEffect` imported but never used | 🟢 Low | Now actively used for localStorage persistence |
-| 7 | **Debug logs in production** — `console.log` statements left in code | 🟢 Low | Removed |
-| 8 | **No data persistence** — All data lost on page refresh | 🟢 Low | Implemented localStorage with migration support |
-
-### 💻 Installation & Development
-
-**Prerequisites**
-
-- Node.js v18+
-- Bun (recommended) or npm
-
-**Steps**
-
-1. **Clone the Repository**
-
-    ```bash
-    git clone https://github.com/your-repo/ionic-react-taskflow.git
-    cd ionic-react-taskflow
-    ```
-
-2. **Install Dependencies**
-
-    ```bash
-    bun install
-    # or
-    npm install
-    ```
-
-3. **Run Development Server**
-
-    ```bash
-    bun dev
-    # or
-    npm run dev
-    ```
-
-    Access the app at `http://localhost:5173`.
-
-4. **Build for Production**
-
-    ```bash
-    bun run build
-    ```
-
-    Output will be generated in the `dist/` folder.
-
-### 🎨 UI/UX Design Philosophy
-
-**Floating Card Interface**
-
-We moved away from the standard list view to a **Floating Card Interface** with intentional spatial design:
-
-- **Subtle curves** — `border-radius: 0.75rem` for modern card feel without excessive rounding
-- **Affordance** — Soft shadows (`box-shadow`) imply interactivity (sliding, tapping)
-- **Breathing room** — Horizontal padding on lists and vertical spacing between cards prevent visual congestion
-- **Color Semantics** — Red (urgency), Yellow (work-in-progress), Green (resolution)
-
-**Progressive Decay Visualization**
-
-The most distinctive UI element. Task cards are **living objects** that change appearance over time:
-
-- CSS `filter: saturate()` and `opacity` transitions create smooth degradation
-- Left-border color accent provides at-a-glance severity indicator
-- `IonBadge` with emoji (`⏳ ⚠️ 💀`) gives precise idle-time context
-- All transitions are animated (`transition: 0.5s ease`) for smooth visual updates
-
-**Action Grouping**
-
-All interactive controls (checkbox, edit, delete) are grouped on the right side (`slot="end"`) of each card, providing a consistent touch target zone.
-
-### ☁️ Deployment
-
-The application is configured for **Cloudflare Pages**:
-
-- **Build Preset**: Vite / React Static
-- **Output Directory**: `dist`
-- **CI Pipeline**: Automatic deployments on push to `principal` branch
-
-### 🗺 Roadmap
-
-Potential future enhancements discussed in the architecture phase:
-
-- [ ] **Energy-Based Filtering** — Filter tasks by mental effort level (Deep Focus / Autopilot / Creative)
-- [ ] **Momentum Streak** — Gamification tracking consecutive days with completed tasks
-- [ ] **Offline-First + Sync** — IndexedDB local storage with cloud sync and conflict resolution
-- [ ] **State Machine** — Formal FSM (XState) for task lifecycle management
-- [ ] **Comprehensive Testing** — Unit (Vitest), Integration (Testing Library), E2E (Cypress)
-- [ ] **Keyboard Shortcuts** — Power-user navigation and action bindings
-- [ ] **Dark Mode** — Full theme toggle leveraging existing CSS variable architecture
-
-> _Architected & Developed by **prog-ops** — june.mbs@gmail.com_
+https://github.com/prog-ops/prog-ops/blob/main/Ionic-React-Task-Flow-README.md
 
 
 
 
 # ✔️ Rust Native Calculator
 
-<img width="331" height="547" alt="nativecalc" src="https://github.com/user-attachments/assets/36709d98-eb50-4b7e-9907-8a240c9e50db" />
-
-
-https://github.com/prog-ops/rust-native-calculator/blob/utama/target/debug/app.exe
-
 A modern, highly responsive, and themeable desktop calculator built with **Rust**, **eframe (egui)**, and **Win32 Native APIs**. 
 
 ### 📌 Project Overview
 The main objective of this project is to create a dynamic, fluid desktop calculator application that deviates from traditional, statically-sized native interfaces. Instead, the application behaves more like a modern responsive web app (akin to React.js + CSS Flexbox/Grid) while executing directly as a native Windows binary. 
 
-### 🛠 Challenge & Solution
+Read more:
 
-**The Challenge**
-
-1. **Fluid Responsiveness:** The calculator needed to be extremely flexible and resizable. Components such as typography, button dimensions, and panel spaces had to recalculate and scale proportionately in real-time as the user resizes the window, without relying on fixed grids.
-2. **Native OS-Level Theming:** Beyond typical app-level color changes, the user requested distinct native-level themes, notably a **"Blur Transparent"** mode. Achieving true glass-like transparency requires deep integration with the OS composition engine, which cross-platform frameworks like `eframe` do not handle out-of-the-box.
-3. **State Integrity:** Interactions within the UI (such as resetting the calculator's input state via the 'C' button) must strictly avoid causing side effects to the global application state (like the active theme or window initialization flags).
-
-**The Solution**
-
-*   **Proportional Layout Engineering:** Instead of hardcoded pixel values, the UI relies on fractional subdivision using `egui`'s `ui.available_size()`. 25% of the viewport is dynamically reserved for the display panel. Font sizes use mathematical `clamp()` functions bounded to the `screen_rect().size().y`, and button dimensions are calculated recursively across the available width and height of the grid layout. This achieves a butter-smooth resizing experience identical to a modern web application.
-*   **Bridging eframe with Desktop Window Manager (DWM):** To achieve the *Blur Transparent* theme, an Unsafe FFI layer via the `windows-sys` crate was integrated. By intercepting the window handle (`HWND`) using `FindWindowW`, the application invokes `DwmEnableBlurBehindWindow` and `DwmSetWindowAttribute`. The `egui` environment's `window_fill` and `panel_fill` alpha channels are systematically stripped (set to `TRANSPARENT`) when this theme is active, allowing the native Windows composition effect to render beautifully behind the app logic.
-*   **Targeted State Mutability:** The `Calculator`'s global state (`struct Calculator`) was refined. Rather than utilizing `Default::default()` for runtime operations (which destructively wipes out theme persistence and initialization markers), a bespoke `reset()` method was implemented. This isolates the clearing of the calculation-specific fields (`display`, `current_op`, `previous_value`) from the application-level lifecycle fields (`theme`, `initialized`).
-
-### 🏗 Architecture & Clean Code Notes
-
-As a Senior Engineering endeavor, it is important to clarify the architectural scope of this iteration.
-
-**Was Clean Architecture Applied Here?**
-**No, strict Clean Architecture was intentionally deferred.** 
-
-The primary focus of this project phase was purely **functional delivery and technical feasibility**—specifically proving that complex behaviors (fluid immediate-mode UI layouts coupled with low-level Win32 FFI hooks) could operate seamlessly together. 
-
-As a result:
-*   The application currently utilizes a **Monolithic State Pattern** where the Domain Logic (math calculations), Presentation Logic (egui rendering), and Infrastructure Logic (Win32 FFI calls) all reside together inside a single `Calculator` struct within `main.rs`.
-*   While the code is clean, readable, and well-commented, it lacks boundary separations (e.g., isolating the FFI logic into a standalone `windows_integration` module, or decoupling the math state-machine so it can be independently unit-tested).
-
-**Future Improvements:**
-If this project were to be scaled, the next step would be applying Domain-Driven Design (DDD) principles: extracting the core calculator engine out of the UI layer, writing unit tests for the operator logic, and encapsulating the OS-specific native API calls behind an abstraction trait to maintain true cross-platform viability.
+https://github.com/prog-ops/prog-ops/blob/main/Rust-Native-Calculator-README.md
 
 
 
 
 # ✔️ 3D Element Collision Simulation (Wind -> Water -> Fire -> Metal -> Earth -> Wind)
 
-https://github.com/user-attachments/assets/abcd411e-fe26-4f99-9f2c-53b7d6799bf0
-
-_Note: FPS and resolution is reduced to limit recording file size_
-
 A highly interactive, physics-based 3D simulation running in the browser, built from scratch using Vanilla JavaScript and **Three.js**. It visually simulates an "elemental battle" where different natural elements collide, bounce, and conquer each other until only one reigns supreme.
-
-## 🚀 Features
-
-- **3D Physics Simulation:** Implements pure elastic collision mathematics mapped seamlessly into a 3D WebGL environment.
-- **Elemental Hierarchy:** A classic battle mechanic:
-  - Wind beats Water
-  - Water beats Fire
-  - Fire beats Metal
-  - Metal beats Rock
-  - Rock beats Wind
-  - ... The cycle continues.
-- **Dynamic Speed Scaling:** Elements accelerate as they win collisions, increasing the simulation's chaos and intensity.
-- **Auto-Detect Endgames:** The system automatically detects single winners, draws, or "stuck" states where remaining elements cannot defeat each other.
 
 ## 🛠️ Tech Stack
 
@@ -769,37 +503,9 @@ A highly interactive, physics-based 3D simulation running in the browser, built 
 - **3D Rendering Engine:** [Three.js](https://threejs.org/) (WebGL)
 - **Bundler / Tools:** Webpack, Bun
 
-## 🎨 Three.js Implementation Highlights
+Read more:
 
-This project heavily emphasizes the use of **Three.js** to elevate a simple 2D concept into a polished 3D experience. Key implementations include:
-
-- **Orthographic Camera:** Instead of a standard perspective camera, it uses an `OrthographicCamera` to create a perfect "top-down" strategic view. This ensures accurate visual scaling and boundary mapping regardless of the browser window size.
-- **PBR Materials (Physically Based Rendering):** Implements `MeshStandardMaterial` to give distinct physical properties to different elements. For example, the "Metal" element is highly reflective (`metalness: 1.0`), while "Earth/Rock" is rough and matte.
-- **Environment Mapping:** Uses `CubeTextureLoader` to provide realistic environmental reflections on metallic objects without needing heavy, external HDRI files.
-- **Dynamic Lighting & Shadows:** Utilizes `DirectionalLight` with `PCFSoftShadowMap` to cast soft, dynamic shadows across the 3D plane. This provides vital depth perception, making the spheres look like they are floating just above the surface.
-- **Explicit Memory Management:** In a simulation where hundreds of objects are created and destroyed rapidly, garbage collection is critical. The code explicitly calls `dispose()` on geometries and materials when elements are destroyed to free up GPU memory and prevent memory leaks.
-
-## 🧠 The Engineering Philosophy (A Senior's Perspective)
-
-Behind the visual appeal lies a highly structured architectural approach:
-
-1. **Separation of Concerns (MVC Pattern):** The core physics logic (calculating vectors, velocities, overlaps, and boundaries) is entirely decoupled from the visual rendering. The internal state (`_simulationX`, `_simulationZ`) calculates the pure math, and Three.js simply reads this state to update the `mesh.position`.
-2. **Algorithmic Vector Math:** The collision system relies on foundational linear algebra (dot products, vector normalization, and tangential vector calculations) rather than relying on a heavy third-party physics engine like Cannon.js or Ammo.js.
-3. **Scalable Architecture:** The project's core, `simulation3d.js`, demonstrates a highly scalable architecture. It seamlessly translates underlying 2D logical physics directly into a full WebGL 3D implementation without breaking or complicating the fundamental business logic.
-4. **Emergent Behavior:** It models how simple, deterministic micro-rules (Element A beats Element B) combined with entropy (random spawn points, bouncing angles) create a highly unpredictable, organic macro-system.
-
-## 💻 How to Run Locally
-
-1. Clone this repository to your local machine.
-2. Open the directory and install dependencies (if using the Webpack pipeline):
-   ```bash
-   bun install
-   ```
-3. Run the development server or open the project using a local live server:
-   ```bash
-   bun run dev
-   ```
-   _Note: Because Three.js loads external textures (for environment mapping), simply opening `index.html` via `file://` might cause CORS errors. Running it through a local server is highly recommended._
+https://github.com/prog-ops/prog-ops/blob/main/3D-Element-Collision-Simulation-README.md
 
 
 
@@ -823,6 +529,10 @@ deployment modes (SPA, SSR, PWA, and others), with a movie list/detail flow.
 - **HTTP Client**: Axios
 - **Styling**: Sass/SCSS
 - **Tooling**: ESLint (with Prettier), Jest, pnpm
+
+Read more:
+
+https://github.com/prog-ops/prog-ops/blob/main/Movue-README.md
 
 
 
