@@ -4,6 +4,8 @@
 
 https://next16-auth-prisma7-dashboard.vercel.app/
 
+https://github.com/prog-ops/prog-ops/edit/main/Serverless-Next-Auth-Prisma-Dashboard-README.md
+
 ### 📋 Executive Summary
 
 **Next-Auth-Prisma-Dashboard** is a rapid-development foundation for building secure, scalable, and aesthetically modern B2B SaaS dashboards. It integrates the latest bleeding-edge technologies (Next.js 16, React 19, Tailwind v4) into a cohesive starter kit. This project solves the common "boilerplate fatigue" by providing a pre-configured architecture with Authentication (OAuth specifically), Database management, and UI Component patterns out-of-the-box.
@@ -23,10 +25,6 @@ The primary business value is **Time-to-Market**: developers can skip days of co
 | **Visualization**      | **Chart.js**     | 4.x                | Powerful, responsive charts for the Dashboard.                                          |
 | **Runtime**            | **Bun**          | 1.x                | Extremely fast JavaScript runtime and package manager (replaces Node/NPM).              |
 | **Environment**        | **Docker**       | Compose v3.8       | Containerizes the database for "one-command" setup.                                     |
-
-Read more:
-
-https://github.com/prog-ops/prog-ops/edit/main/Serverless-Next-Auth-Prisma-Dashboard-README.md
 
 
 
@@ -58,6 +56,8 @@ https://native-dashboard-nu.vercel.app/
 https://github.com/user-attachments/assets/4e94abb3-5672-4f82-96b5-6c8649e82532
 
 https://drive.google.com/file/d/1IDfBjIxcZG0aowIKjYQfByM8m42IXrce/view?usp=drive_link
+
+https://github.com/prog-ops/prog-ops/blob/main/Note-History-README.md
 
 > Lightweight, portable desktop notes application with local-first storage, edit history tracking, and native Windows transparency effects — built on Tauri v2.
 
@@ -97,16 +97,14 @@ The application is built with a **Rust backend** (Tauri v2) handling file I/O an
 | Bun | Package manager and script runner (configured in `tauri.conf.json`) |
 | Cargo | Rust dependency management and compilation |
 
-Read more:
-
-https://github.com/prog-ops/prog-ops/blob/main/Note-History-README.md
-
 
 
 
 # ✔️ Shopping Gallery UI (Modern E-Commerce)
 
 https://shopping-gallery-t2yo.vercel.app/
+
+https://github.com/prog-ops/prog-ops/blob/main/Shopping-Gallery-ECommerce-README.md
 
 A high-performance, responsive e-commerce homepage interface built with **React**, **Zustand**, and **TanStack Query**.
 
@@ -120,16 +118,14 @@ This project demonstrates modern frontend architecture, focusing on **Core Web V
 - **Icons**: React Icons
 - **Language**: JavaScript (ES6+)
 
-Read more:
-
-https://github.com/prog-ops/prog-ops/blob/main/Shopping-Gallery-ECommerce-README.md
-
 
 
 
 # ✔️ Mailbox App
 
 https://mailbox-flame.vercel.app/
+
+https://github.com/prog-ops/prog-ops/blob/main/Mailbox-App-README.md
 
 A modern, fast, and elegant personal communication dashboard built with **React 19** and **Vite**. This application combines a seamless email-style inbox with a robust task management system, all wrapped in a premium, responsive interface inspired by modern design principles.
 
@@ -146,10 +142,6 @@ A modern, fast, and elegant personal communication dashboard built with **React 
 | **Icons**            | [MUI Icons](https://mui.com/material-ui/material-icons/)            |
 | **Date Management**  | [date-fns](https://date-fns.org/) & [dayjs](https://day.js.org/)    |
 | **API Backend**      | [JSONPlaceholder](https://jsonplaceholder.typicode.com/)            |
-
-Read more:
-
-https://github.com/prog-ops/prog-ops/blob/main/Mailbox-App-README.md
 
 
 
@@ -221,15 +213,17 @@ https://github.com/user-attachments/assets/3c9738ba-f120-43ad-bbd0-2ed8933f715a
 
 # ✔️ Seller Products - Full-stack Product Management Dashboard
 
-A fullstack product management system (Seller Dashboard) built with **React 18** and **Express.js**, featuring JWT authentication, file upload, layered backend architecture, and a modern Ant Design UI.
-
-> This project demonstrates production-grade patterns: separation of concerns, centralized error handling, security hardening, and standardized API contracts.
+https://github.com/prog-ops/prog-ops/blob/main/Seller-Product-Management-README.md
 
 Swagger API Docs record:
 https://drive.google.com/file/d/1QR9sNzz_CnJCWnAAoU1TyCGo8srADOOz/view?usp=drive_link
 
 Vitest + Supertest integration tests report file:
 https://drive.google.com/file/d/1X30grHADev7XEzhrm2gHOpdwTH2qNrKZ/view?usp=sharing
+
+A fullstack product management system (Seller Dashboard) built with **React 18** and **Express.js**, featuring JWT authentication, file upload, layered backend architecture, and a modern Ant Design UI.
+
+> This project demonstrates production-grade patterns: separation of concerns, centralized error handling, security hardening, and standardized API contracts.
 
 ### Tech Stack
 
@@ -241,10 +235,6 @@ https://drive.google.com/file/d/1X30grHADev7XEzhrm2gHOpdwTH2qNrKZ/view?usp=shari
 | **Auth** | JWT (jsonwebtoken), bcryptjs |
 | **Security** | Helmet, express-rate-limit, scoped CORS |
 | **Runtime** | Bun (compatible with Node.js/npm) |
-
-Read more:
-
-https://github.com/prog-ops/prog-ops/blob/main/Seller-Product-Management-README.md
 
 
 
@@ -442,6 +432,8 @@ A modern web application built with **Next.js 14**, **TypeScript**, and **Fireba
 
 # ✔️ Ionic React TaskFlow
 
+https://github.com/prog-ops/prog-ops/blob/main/Ionic-React-Task-Flow-README.md
+
 > **A Momentum-Driven Hybrid Mobile Task Management App**
 
 ### 📋 Executive Summary
@@ -472,28 +464,24 @@ TaskFlow implements two core differentiators:
 | **Styling** | CSS3 Variables + Ionic Theming | CSS custom properties for responsive design and dark mode readiness |
 | **Persistence** | localStorage | Zero-config, instant, with migration layer for schema evolution |
 
-Read more:
-
-https://github.com/prog-ops/prog-ops/blob/main/Ionic-React-Task-Flow-README.md
-
 
 
 
 # ✔️ Rust Native Calculator
+
+https://github.com/prog-ops/prog-ops/blob/main/Rust-Native-Calculator-README.md
 
 A modern, highly responsive, and themeable desktop calculator built with **Rust**, **eframe (egui)**, and **Win32 Native APIs**. 
 
 ### 📌 Project Overview
 The main objective of this project is to create a dynamic, fluid desktop calculator application that deviates from traditional, statically-sized native interfaces. Instead, the application behaves more like a modern responsive web app (akin to React.js + CSS Flexbox/Grid) while executing directly as a native Windows binary. 
 
-Read more:
-
-https://github.com/prog-ops/prog-ops/blob/main/Rust-Native-Calculator-README.md
-
 
 
 
 # ✔️ 3D Element Collision Simulation (Wind -> Water -> Fire -> Metal -> Earth -> Wind)
+
+https://github.com/prog-ops/prog-ops/blob/main/3D-Element-Collision-Simulation-README.md
 
 A highly interactive, physics-based 3D simulation running in the browser, built from scratch using Vanilla JavaScript and **Three.js**. It visually simulates an "elemental battle" where different natural elements collide, bounce, and conquer each other until only one reigns supreme.
 
@@ -503,16 +491,14 @@ A highly interactive, physics-based 3D simulation running in the browser, built 
 - **3D Rendering Engine:** [Three.js](https://threejs.org/) (WebGL)
 - **Bundler / Tools:** Webpack, Bun
 
-Read more:
-
-https://github.com/prog-ops/prog-ops/blob/main/3D-Element-Collision-Simulation-README.md
-
 
 
 
 # ✔️ Movie CRUD App (Vue 3 + Quasar 2)
 
 https://github.com/prog-ops/movue
+
+https://github.com/prog-ops/prog-ops/blob/main/Movue-README.md
 
 This project is a **Movie CRUD (Create, Read, Update, Delete) application**
 built with **Vue 3**, **Quasar Framework 2 (Vite)**, **TypeScript**, **Pinia**
@@ -529,10 +515,6 @@ deployment modes (SPA, SSR, PWA, and others), with a movie list/detail flow.
 - **HTTP Client**: Axios
 - **Styling**: Sass/SCSS
 - **Tooling**: ESLint (with Prettier), Jest, pnpm
-
-Read more:
-
-https://github.com/prog-ops/prog-ops/blob/main/Movue-README.md
 
 
 
