@@ -1,4 +1,4 @@
-# Todoers
+# Todoers - Note React Native App
 
 https://github.com/user-attachments/assets/bc391374-202f-4c10-a607-538e3c98bba2
 
@@ -134,6 +134,8 @@ npm test -- --coverage
 # Watch mode
 npm test -- --watch
 ```
+
+<img width="1654" height="402" alt="noteapp Test Coverage LCOV Report" src="https://github.com/user-attachments/assets/6d0d5403-30bb-4037-aaf8-0964c3a6e841" />
 
 ## Project Structure
 
