@@ -496,8 +496,6 @@ A highly interactive, physics-based 3D simulation running in the browser, built 
 
 # ✔️ Movie CRUD App (Vue 3 + Quasar 2)
 
-https://github.com/prog-ops/movue
-
 https://github.com/prog-ops/prog-ops/blob/main/Movue-README.md
 
 This project is a **Movie CRUD (Create, Read, Update, Delete) application**
@@ -528,9 +526,7 @@ A fine custom Material UI calendar and password field with strict validations
 
 
 
-# ✔️ Note React Native App
-
-https://github.com/prog-ops/NoteApp
+# ✔️ [Todoers - React Native Note App](https://github.com/prog-ops/prog-ops/blob/main/Todoers.md)
 
 ### Features
 
